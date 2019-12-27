@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Loading from '../views/Loading.vue'
 import First from '../views/First.vue'
+import TransForm from '../views/TransForm.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [{
     name: 'home',
     component: First
   },
+  {
+    path: '/transform',
+    name: 'transform',
+    component: TransForm
+  },
   // {
   //   path: '/about',
   //   name: 'about',
@@ -27,7 +33,7 @@ const routes = [{
 
 const router = new VueRouter({
   routes,
-  mode:'history',
+  mode: 'history',
   base: process.env.BASE_URL,
 })
 

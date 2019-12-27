@@ -1,5 +1,5 @@
 <template>
-  <div class="bg" v-touch:swipe.bottom="swipeHandler">
+  <div class="bg" v-touch:swipe.top="swipeHandler">
     <div class="loading">
       <img src="@/assets/index/Logo.png" class="logo" alt />
       <img src="@/assets/index/文字.png" class="txt" alt />
@@ -20,7 +20,7 @@ export default {
   methods: {
     swipeHandler() {
       console.log(11);
-      this.$router.back();
+      this.$router.push("/transform");
     }
   }
 };
@@ -56,7 +56,7 @@ export default {
     .up {
       position: absolute;
       width: 52.5px;
-      bottom: 70px;
+      bottom: 40px;
     }
   }
 }
