@@ -1,32 +1,32 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <!-- <transition name="van-slide-down" mode="out-in"> -->
+    <router-view />
+    <!-- </transition> -->
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import url(../public/reset.css);
+@font-face {
+  font-family: "方正准圆简体";
+  src: url("http://cdn.hwzhj.top/FZY3JW.TTF");
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+@font-face {
+  src: url("http://cdn.hwzhj.top/FZZZHONGJW.TTF");
+  font-family: "方正正中黑简体";
+}
+html {
+  font-family: "方正正中黑简体", "方正准圆简体";
+  height: 100%;
+}
+body,
+#app {
+  height: 100%;
+  font-size: 37.5px;
+  background-image: url("./assets/loading/BG.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 </style>
