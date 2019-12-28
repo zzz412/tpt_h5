@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import Loading from '../views/Loading.vue'
 import First from '../views/First.vue'
 import TransForm from '../views/TransForm.vue'
+import Select from '../views/Select.vue'
+import Transition from '../views/Transition.vue'
+import Share from '../views/Share.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +24,22 @@ const routes = [{
     name: 'transform',
     component: TransForm
   },
+  {
+    path: '/select',
+    name: 'select',
+    component: Select
+  },
+  {
+    path: '/transition',
+    name: 'transition',
+    component: Transition
+  },
+  {
+    path: '/share',
+    name: 'share',
+    component: Share
+  },
+  
   // {
   //   path: '/about',
   //   name: 'about',

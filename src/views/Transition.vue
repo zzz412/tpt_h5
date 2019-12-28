@@ -1,0 +1,77 @@
+<template>
+	<div class="bg" v-touch:swipe.bottom="swipeHandler">
+		<div class="loading">
+			<div class="mail"></div>
+			<div class="star"></div>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		data(){
+			return {
+				// 延时器对象
+				timeOutObj : '',
+			}
+		},
+		mounted() {
+			this.timeOutObj = setTimeout(()=>{
+				this.$router.push("/share");
+			},2000)
+		},
+		methods: {
+			swipeHandler() {
+				this.$router.back();
+			},
+		},
+		beforeDestroy() {
+			clearInterval(this.timeOutObj);
+		}
+	};
+</script>
+
+<style lang="scss" scoped>
+	.bg {
+		height: 100%;
+		background-image: url("../assets/loading/BG.png");
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+
+		.loading {
+			position: relative;
+			margin: 0 auto;
+			height: 100%;
+			width: 90%;
+			display: flex;
+			justify-content: center;
+			.mail {
+				position: absolute;
+				width: 60%;
+				height: 80%;
+				top: 100px;
+				background-image: url("../assets/transform2/信箱.png");
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: 50% 50%;
+			}
+			.star{
+				position: absolute;
+				width: 90%;
+				height: 78%;
+				background-image: url("../assets/transform2/信件.png");
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: 50% 50%;
+			}
+
+
+			.up {
+				position: absolute;
+				width: 52.5px;
+				bottom: 40px;
+			}
+		}
+	}
+</style>
