@@ -8,6 +8,9 @@ import First from '../views/First.vue'
 import TransForm from '../views/TransForm.vue'
 // 用户选择信息页
 import Info from '../views/Info.vue'
+import Select from '../views/Select.vue'
+import Transition from '../views/Transition.vue'
+import Share from '../views/Share.vue'
 
 Vue.use(VueRouter)
 
@@ -31,6 +34,22 @@ const routes = [{
     name: 'info',
     component: Info
   },
+  {
+    path: '/select',
+    name: 'select',
+    component: Select
+  },
+  {
+    path: '/transition',
+    name: 'transition',
+    component: Transition
+  },
+  {
+    path: '/share',
+    name: 'share',
+    component: Share
+  },
+
   // {
   //   path: '/about',
   //   name: 'about',
