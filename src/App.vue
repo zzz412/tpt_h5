@@ -28,5 +28,6 @@ body,
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
+  overflow: hidden;
 }
 </style>

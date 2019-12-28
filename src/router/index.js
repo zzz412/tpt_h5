@@ -1,8 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+// 加载页面
 import Loading from '../views/Loading.vue'
+// 首屏
 import First from '../views/First.vue'
+// 过渡页 文字页
 import TransForm from '../views/TransForm.vue'
+// 用户选择信息页
+import Info from '../views/Info.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +25,11 @@ const routes = [{
     path: '/transform',
     name: 'transform',
     component: TransForm
+  },
+  {
+    path: '/info',
+    name: 'info',
+    component: Info
   },
   // {
   //   path: '/about',

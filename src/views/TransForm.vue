@@ -1,5 +1,5 @@
 <template>
-  <div class="bg" v-touch:swipe.bottom="swipeHandler">
+  <div class="bg" v-touch:swipe.top="swipeHandler">
     <div class="loading">
       <div class="text">
         <p>回首来路，这十年你过得如何？</p>
@@ -15,7 +15,12 @@
       </div>
       <div class="clock">
         <p>2020</p>
+        <img class="bg_clock" src="@/assets/transform/信纸.png" alt />
+        <img class="bg_hour" src="@/assets/transform/指针-短.png" alt />
+        <img class="bg_minute" src="@/assets/transform/指针-长.png" alt />
       </div>
+      <!-- <div class="bg_clock"></div> -->
+
       <img src="@/assets/index/向上滑动.png" class="up" alt />
     </div>
   </div>
@@ -25,7 +30,7 @@
 export default {
   methods: {
     swipeHandler() {
-      this.$router.back();
+      this.$router.push('/info');
     }
   }
 };
@@ -54,22 +59,41 @@ export default {
       top: 70px;
       position: absolute;
       color: rgba(255, 255, 255, 0.8);
-      line-height: 2;
+      line-height: 1.8;
       text-align: center;
     }
     .clock {
       position: absolute;
       width: 200px;
       height: 160px;
-      background: url(/img/表盘.9d52adc7.png) no-repeat;
+      background: url("../assets/transform/表盘.png") no-repeat;
       background-size: 100%;
       top: 400px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
+      .bg_clock {
+        position: absolute;
+        width: 251px;
+        height: 140px;
+        top: -35px;
+        left: -40px;
+      }
+      .bg_hour {
+        width: 6px;
+        top: 50px;
+        left: 96px;
+        position: absolute;
+      }
+      .bg_minute {
+        position: absolute;
+        width: 34px;
+        top: 47px;
+        left: 67px;
+      }
       p {
         color: #fff;
-        font-size: 26px;
+        font-size: 22px;
         margin-bottom: 26px;
       }
     }
