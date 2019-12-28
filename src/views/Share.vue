@@ -49,28 +49,28 @@
 			.logo {
 				position: absolute;
 				width: 90px;
-				top: 85px;
+				top: 40px;
 				left: 0rem;
 			}
 
 			.ten-years {
 				position: absolute;
 				width: 190px;
-				top: 135px;
+				top: 90px;
 			}
 
 			.secret {
 				position: absolute;
 				width: 100%;
 				height: 400px;
-				top: 205px;
+				top: 160px;
 				background-image: url("../assets/result/60保密.png");
 				background-repeat:no-repeat;
 				background-size: cover;
 				.secret-text{
 					position: absolute;
 					width: 80%;
-					top: 35px;
+					top: 30px;
 					left: 35px;
 					font-size: 18px;
 					font-weight: 200;
@@ -79,7 +79,7 @@
 						position: absolute;
 						font-size: 16px;
 						width: 100%;
-						top: 35px;
+						top: 30px;
 						left: 20px;
 						list-style: decimal;
 						li{
@@ -92,7 +92,7 @@
 			.share{
 				position: absolute;
 				width: 150px;
-				top: 630px;
+				top: 580px;
 			}
 		}
 	}

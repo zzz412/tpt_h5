@@ -1,5 +1,5 @@
 <template>
-  <div class="bg" v-touch:swipe.bottom="swipeHandler">
+  <div class="bg" v-touch:swipe.bottom="swipeHandler" v-touch:swipe.top="swipeTopHandler">
     <div class="loading">
       <div class="top">
         <div class="text">你的信件署名</div>
@@ -21,7 +21,10 @@ export default {
   methods: {
     swipeHandler() {
       this.$router.back();
-    }
+    },
+	swipeTopHandler(){
+      this.$router.push("/select");
+	}
   }
 };
 </script>

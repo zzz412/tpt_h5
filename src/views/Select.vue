@@ -56,7 +56,7 @@
 				font-size: 14px;
 				width: 100%;
 				height: 400px;
-				top: 100px;
+				top: 80px;
 				position: absolute;
 				color: rgba(255, 255, 255, 0.8);
 				line-height: 2;
@@ -67,7 +67,7 @@
 				position: absolute;
 				width: 100%;
 				height: 160px;
-				top: 600px;
+				top: 560px;
 				text-align: center;
 				.change {
 					position: absolute;
