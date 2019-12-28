@@ -9,16 +9,16 @@
 
 <script>
 	export default {
-		data(){
+		data() {
 			return {
 				// 延时器对象
-				timeOutObj : '',
+				timeOutObj: '',
 			}
 		},
 		mounted() {
-			this.timeOutObj = setTimeout(()=>{
+			this.timeOutObj = setTimeout(() => {
 				this.$router.push("/share");
-			},2000)
+			}, 3000)
 		},
 		methods: {
 			swipeHandler() {
@@ -46,6 +46,7 @@
 			width: 90%;
 			display: flex;
 			justify-content: center;
+
 			.mail {
 				position: absolute;
 				width: 60%;
@@ -56,7 +57,8 @@
 				background-repeat: no-repeat;
 				background-position: 50% 50%;
 			}
-			.star{
+
+			.star {
 				position: absolute;
 				width: 90%;
 				height: 78%;
@@ -64,6 +66,21 @@
 				background-size: contain;
 				background-repeat: no-repeat;
 				background-position: 50% 50%;
+				animation: mymove 3.3s linear infinite;
+
+				@keyframes mymove {
+					0% {
+						width: 90%;
+						height: 78%;
+						/*开始为原始大小*/
+					}
+
+					100% {
+						width: 0%;
+						height: 88%;
+					}
+
+				}
 			}
 
 

@@ -2,10 +2,12 @@
 	<div class="bg" v-touch:swipe.bottom="swipeHandler">
 		<div class="loading">
 			<div class="tab">
-				
+				<div v-for="da in showData">
+					<div>{{da}}</div>
+				</div>
 			</div>
 			<div class="button">
-				<img src="@/assets/select/换一换.png" class="change" alt />
+				<img src="@/assets/select/换一换.png" @click="changeDataHandler" class="change" alt />
 				<img src="@/assets/select/确定按钮.png" class="sure" @click="swipeTopHandler" />
 			</div>
 		</div>
@@ -15,14 +17,22 @@
 <script>
 	import dataJson from '../utils/data.js'
 	export default {
-		data(){
+		data() {
 			return {
 				// 年代
 				year: 80,
+				data: dataJson,
+				dataLength: 0,
+				showData: [],
+			}
+		},
+		watch: {
+			showData(val){
+				console.log(val)
 			}
 		},
 		mounted() {
-			console.log(dataJson.zeroZero[0].data)
+			this.showData = this.data.zeroZero[this.dataLength].data
 		},
 		methods: {
 			swipeHandler() {
@@ -30,6 +40,13 @@
 			},
 			swipeTopHandler() {
 				this.$router.push("/transition");
+			},
+			changeDataHandler() {
+				this.dataLength ++;
+				if(this.dataLength > this.data.zeroZero.length-1){
+					this.dataLength = 0;
+				}
+				this.showData = this.data.zeroZero[this.dataLength].data
 			}
 		}
 	};
@@ -69,11 +86,13 @@
 				height: 160px;
 				top: 560px;
 				text-align: center;
+
 				.change {
 					position: absolute;
 					width: 100px;
 					left: 40px;
 				}
+
 				.sure {
 					position: absolute;
 					width: 100px;
