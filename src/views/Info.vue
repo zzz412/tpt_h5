@@ -4,27 +4,68 @@
       <div class="top">
         <div class="text">你的信件署名</div>
         <div class="input_bg">
-          <input type="text" />
+          <input type="text" placeholder="署名..." maxlength="10" v-model="userName" />
         </div>
       </div>
       <div class="bottom">
-        <div class="text">你的信件署名</div>
-        <div class="year_bg"></div>
+        <div class="text">你生于哪个年代</div>
+        <div class="year_bg" @click="show=true">
+          <span>{{year[0]}}</span>
+          <span>{{year[1]}}</span>
+        </div>
       </div>
       <img src="@/assets/index/向上滑动.png" class="up" alt />
     </div>
+    <Popup v-model="show" position="bottom">
+      <!-- <div></div> -->
+      <Picker :columns="columns" show-toolbar @cancel="show = false" @confirm="onConfirm" />
+    </Popup>
   </div>
 </template>
 
 <script>
+import { Picker, Popup, Toast } from "vant";
+//导入vuex state mutations辅助方法
+import { mapMutations, mapState } from "vuex";
 export default {
+  components: {
+    Picker,
+    Popup
+  },
+  mounted() {
+    this.year = this.userInfo.userYear || "90";
+    this.userName = this.userInfo.userName || "";
+  },
+  computed: {
+    ...mapState(["userInfo"])
+  },
+  data() {
+    return {
+      show: false,
+      columns: ["60", "70", "80", "90", "00"],
+      year: "90",
+      userName: ""
+    };
+  },
   methods: {
+    ...mapMutations(["CHANGE_USERINFO"]),
     swipeHandler() {
       this.$router.back();
     },
-	swipeTopHandler(){
+    swipeTopHandler() {
+      if (!this.userName) {
+        Toast("请填写信件署名");
+        return;
+      }
+      // 页面离开时保存用户信息
+      this.CHANGE_USERINFO({ userName: this.userName, userYear: this.year });
       this.$router.push("/select");
-	}
+    },
+    onConfirm(value) {
+      console.log(value);
+      this.year = value;
+      this.show = false;
+    }
   }
 };
 </script>
@@ -68,9 +109,14 @@ export default {
           border: none;
           outline: none;
           font-size: 25px;
-          color: #c06c2c;
+          color: transparent;
+          text-shadow: 0 0 0 #c06c2c;
+          // color: #c06c2c;
           text-align: center;
           margin-top: 6px;
+          &::placeholder {
+            color: #c06c2c;
+          }
         }
       }
     }
@@ -83,6 +129,16 @@ export default {
         background: url("../assets/info/年代-背景.png") no-repeat;
         background-size: 100%;
         margin-top: 20px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        justify-content: space-around;
+        span {
+          display: block;
+          font-size: 110px;
+          color: #c16929;
+        }
       }
     }
 
