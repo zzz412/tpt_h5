@@ -1,5 +1,21 @@
 <template>
-	<div class="bg" v-touch:swipe.bottom="swipeHandler"  v-touch:longtap="longtapHandler" ref="imageWrapper">
+	<div>
+		<div class="bg" ref="imageWrapper">
+			<div class="loading">
+				<img src="@/assets/index/Logo.png" class="logo" alt />
+				<img src="@/assets/result/文案.png" class="ten-years" alt />
+				<div :class="showBg">
+					<p class="secret-text">
+						<span>{{userInfo.userName}}：</span>
+						<ol>
+							<li v-for="(da,index) in selectedData" :key="index">{{da}}</li>
+						</ol>
+					</p>
+				</div>
+				<img src="@/assets/result/别人查看-引导.png" class="qrCode" alt />
+			</div>
+		</div>
+	<div class="bg" v-touch:swipe.bottom="swipeHandler" v-touch:longtap="longtapHandler">
 		<div class="loading">
 			<img src="@/assets/index/Logo.png" class="logo" alt />
 			<img src="@/assets/result/文案.png" class="ten-years" alt />
@@ -14,15 +30,12 @@
 			<img v-if="!showQrCode" src="@/assets/result/分享.png" @click="showWxImage" class="share" alt />
 			<img v-else src="@/assets/result/别人查看-引导.png" class="qrCode" alt />
 		</div>
-		<Popup :show="showImgModel">
-			123
-			<img :src="imgUrl" class="qrCode" />
-		</Popup>
-		
 		
 		<div class="shareWx" @click="hiddenImage" v-show="wxImageShow">
 			<img class="wxImage" src="@/assets/result/微信内-分享提示.png" />
 		</div>
+	</div>
+	
 	</div>
 </template>
 
@@ -64,7 +77,6 @@
 				showBg: 'secret six',
 				showQrCode: false,
 				imgUrl: '',
-				showImgModel: false,
 				wxImageShow: false,
 			};
 		},
@@ -92,15 +104,12 @@
 				this.$router.back();
 			},
 			longtapHandler() {
-				this.showQrCode = true;
+				// this.showQrCode = true;
 				html2canvas(this.$refs.imageWrapper).then(canvas => {
 					let dataURL = canvas.toDataURL("image/png");
 					this.imgUrl = dataURL;
 					if (this.imgUrl !== "") {
-						this.showImgModel = true;
-						setTimeout(()=>{
-							this.saveFile(this.imgUrl,'share.png');
-						}, 1000);
+						this.saveFile(this.imgUrl,'share.png');
 					}
 				});
 			},
@@ -130,9 +139,9 @@
 			margin: 0 auto;
 			height: 100%;
 			width: 100%;
-			top: 0px;
 			display: flex;
 			justify-content: center;
+			z-index: 999;
 			.wxImage{
 				width: 100%;
 			}
