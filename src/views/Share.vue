@@ -33,21 +33,10 @@
 				<img src="http://cdn.hwzhj.top/别人查看-引导.png" class="qrCode" alt />
 			</div>
 		</div>
-		<Popup v-model="show">
-			<div class="bg" ref="imageWrapper">
-				<div class="loading">
-					<img src="http://cdn.hwzhj.top/Logo.png" class="logo" alt />
-					<img src="http://cdn.hwzhj.top/文案.png" class="ten-years" alt />
-					<div :class="showBg">
-						<p class="secret-text">
-							<span>{{userInfo.userName}}：</span>
-							<ol>
-								<li v-for="(da,index) in selectedData" :key="index">{{da}}</li>
-							</ol>
-						</p>
-					</div>
-					<img src="http://cdn.hwzhj.top/别人查看-引导.png" class="qrCode" alt />
-				</div>
+		<Popup v-model="show" style="width: 80%;">
+			<div style="text-align: center;font-size:22px;margin: 10px 0px;">长按保存图片</div>
+			<div style="text-align: center;font-size:22px;margin: 10px 0px;">
+				<img :src="imgUrl" style="width: 90%;"/>
 			</div>
 		</Popup>
 	</div>
@@ -66,7 +55,7 @@
 		},
 		data() {
 			return {
-				show:true,
+				show: false,
 				bg: [{
 					name: '60',
 					path: '60保密.png',
@@ -123,7 +112,8 @@
 					let dataURL = canvas.toDataURL("image/png");
 					this.imgUrl = dataURL;
 					if (this.imgUrl !== "") {
-						this.saveFile(this.imgUrl, 'share.jpg');
+						this.show = true;
+						// this.saveFile(this.imgUrl, 'share.jpg');
 					}
 				});
 			},
