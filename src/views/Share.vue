@@ -1,5 +1,23 @@
 <template>
-	<div>
+	<div class="bg" v-touch:swipe.bottom="swipeHandler" v-touch:longtap="longtapHandler">
+		<div class="loading">
+			<img src="@/assets/index/Logo.png" class="logo" alt />
+			<img src="@/assets/result/文案.png" class="ten-years" alt />
+			<div :class="showBg">
+				<p class="secret-text">
+					<span>{{userInfo.userName}}：</span>
+					<ol>
+						<li v-for="(da,index) in selectedData" :key="index">{{da}}</li>
+					</ol>
+				</p>
+			</div>
+			<div class="share" @click="showWxImage"></div>
+		</div>
+
+		<div class="shareWx" @click="hiddenImage" v-show="wxImageShow">
+			<img class="wxImage" src="@/assets/result/微信内-分享提示.png" />
+		</div>
+		
 		<div class="bg" ref="imageWrapper">
 			<div class="loading">
 				<img src="@/assets/index/Logo.png" class="logo" alt />
@@ -15,41 +33,16 @@
 				<img src="@/assets/result/别人查看-引导.png" class="qrCode" alt />
 			</div>
 		</div>
-	<div class="bg" v-touch:swipe.bottom="swipeHandler" v-touch:longtap="longtapHandler">
-		<div class="loading">
-			<img src="@/assets/index/Logo.png" class="logo" alt />
-			<img src="@/assets/result/文案.png" class="ten-years" alt />
-			<div :class="showBg">
-				<p class="secret-text">
-					<span>{{userInfo.userName}}：</span>
-					<ol>
-						<li v-for="(da,index) in selectedData" :key="index">{{da}}</li>
-					</ol>
-				</p>
-			</div>
-			<img v-if="!showQrCode" src="@/assets/result/分享.png" @click="showWxImage" class="share" alt />
-			<img v-else src="@/assets/result/别人查看-引导.png" class="qrCode" alt />
-		</div>
-		
-		<div class="shareWx" @click="hiddenImage" v-show="wxImageShow">
-			<img class="wxImage" src="@/assets/result/微信内-分享提示.png" />
-		</div>
-	</div>
-	
 	</div>
 </template>
 
 <script>
-	import { Popup } from "vant";
 	import html2canvas from "html2canvas"
 	import {
 		mapMutations,
 		mapState
 	} from "vuex";
 	export default {
-		components: {
-		  Popup
-		},
 		data() {
 			return {
 				bg: [{
@@ -93,31 +86,30 @@
 		},
 		methods: {
 			// 显示分享
-			showWxImage(){
+			showWxImage() {
 				this.wxImageShow = true;
 			},
 			// 隐藏分享图标
-			hiddenImage(){
+			hiddenImage() {
 				this.wxImageShow = false;
 			},
 			swipeHandler() {
 				this.$router.back();
 			},
 			longtapHandler() {
-				// this.showQrCode = true;
 				html2canvas(this.$refs.imageWrapper).then(canvas => {
 					let dataURL = canvas.toDataURL("image/png");
 					this.imgUrl = dataURL;
 					if (this.imgUrl !== "") {
-						this.saveFile(this.imgUrl,'share.png');
+						this.saveFile(this.imgUrl, 'share.jpg');
 					}
 				});
 			},
-			saveFile(data, filename){
+			saveFile(data, filename) {
 				let save_link = document.createElement('a');
 				save_link.href = data;
 				save_link.download = filename;
-			
+
 				let event = document.createEvent('MouseEvents');
 				event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
 				save_link.dispatchEvent(event);
@@ -133,8 +125,8 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
-		
-		.shareWx{
+
+		.shareWx {
 			position: absolute;
 			margin: 0 auto;
 			height: 100%;
@@ -142,11 +134,12 @@
 			display: flex;
 			justify-content: center;
 			z-index: 999;
-			.wxImage{
+
+			.wxImage {
 				width: 100%;
 			}
 		}
-		
+
 		.loading {
 			position: relative;
 			margin: 0 auto;
@@ -226,6 +219,10 @@
 				position: absolute;
 				width: 150px;
 				top: 580px;
+				background-image: url("../assets/result/分享.png");
+				background-size: contain;
+				height: 58px;
+				background-repeat: no-repeat;
 			}
 
 			.qrCode {
