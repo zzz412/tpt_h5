@@ -98,8 +98,7 @@
 					this.imgUrl = dataURL;
 					if (this.imgUrl !== "") {
 						this.showImgModel = true;
-						console.log(this.showImgModel)
-						// this.saveFile(this.imgUrl,'xxx.png');
+						this.saveFile(this.imgUrl,'xxx.png');
 					}
 				});
 			},
