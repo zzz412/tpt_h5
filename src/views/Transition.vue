@@ -67,7 +67,7 @@
 				background-size: contain;
 				background-repeat: no-repeat;
 				background-position: 50% 50%;
-				animation: mymove 3.3s linear infinite;
+				animation: mymove 3.3s linear infinite alternate;
 
 				@keyframes mymove {
 					0% {

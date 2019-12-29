@@ -68,7 +68,7 @@ export default {
       this.$store.commit("CHANGE_ROUTER", "Select");
     },
     onConfirm(value) {
-      console.log(value);
+      // console.log(value);
       this.year = value;
       this.show = false;
     }
