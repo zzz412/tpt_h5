@@ -65,7 +65,6 @@ export default {
     // 选择标签
     tagChecked(index) {
       this.showData[index].check = !this.showData[index].check;
-      console.log(this.showData[index].check);
     },
     swipeHandler() {
       this.$router.back();
