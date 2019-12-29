@@ -9,16 +9,21 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     // 用户信息
-    userInfo: {}
+    userInfo: {},
+	// 已选择数据
+	selectedData: [],
   },
   mutations: {
     // 更改用户信息
     [CHANGE_USERINFO](state, info) {
-      this.state.userInfo = {
-        ...this.state.userInfo,
+      state.userInfo = {
+        ...state.userInfo,
         ...info
       };
-    }
+    },
+	changeSelectedData(state, info) {
+	  state.selectedData = info;
+	}
   },
   actions: {},
   modules: {}
