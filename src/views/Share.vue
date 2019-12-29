@@ -7,7 +7,7 @@
 				<p class="secret-text">
 					<span>{{userInfo.userName}}：</span>
 					<ol>
-						<li v-for="da in selectedData">{{da}}</li>
+						<li v-for="(da,index) in selectedData" :key="index">{{da}}</li>
 					</ol>
 				</p>
 			</div>
