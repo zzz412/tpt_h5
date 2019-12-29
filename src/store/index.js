@@ -14,8 +14,8 @@ export default new Vuex.Store({
   mutations: {
     // 更改用户信息
     [CHANGE_USERINFO](state, info) {
-      this.state.userInfo = {
-        ...this.state.userInfo,
+      state.userInfo = {
+        ...state.userInfo,
         ...info
       };
     }

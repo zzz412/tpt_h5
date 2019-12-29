@@ -57,19 +57,15 @@ export default {
       position: absolute;
       width: 52.5px;
       bottom: 40px;
-	  animation: mymove 2s linear infinite;
-	  
-	  @keyframes mymove {
-	  	0% {
-			bottom: 40px;
-	  		/*开始为原始大小*/
-	  	}
-	  
-	  	100% {
-			bottom: 60px;
-	  	}
-	  
-	  }
+      animation: mymove 1.3s ease-in-out infinite alternate;
+      @keyframes mymove {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(0, 6px);
+        }
+      }
     }
   }
 }

@@ -2,7 +2,7 @@
   <div class="bg" v-touch:swipe.top="swipeHandler">
     <div class="loading">
       <div class="text">
-        <p>回首来路，这十年你过得如何？</p>
+        <!-- <p>回首来路，这十年你过得如何？</p>
         <p>坚持的事能令你无悔吗？</p>
         <p>成就也还算不赖吗？</p>
         <p>这一路风雨兼程，每一刻都值得反复怀念</p>
@@ -11,7 +11,10 @@
         <p>站在未来十年的时间起点上，想必你也感慨良多</p>
         <p>现在，不妨提笔，写一封信</p>
         <p>告诉TA未来十年，您有哪些期许</p>
-        <p>而收件人，是未来的自己</p>
+        <p>而收件人，是未来的自己</p>-->
+        <transition-group name="list">
+          <p v-for="(item ,index) in data" :key="index">{{item}}</p>
+        </transition-group>
       </div>
       <div class="clock">
         <p>2020</p>
@@ -28,15 +31,58 @@
 
 <script>
 export default {
+  data() {
+    return {
+      originData: [
+        "回首来路，这十年你过得如何？",
+        "坚持的事能令你无悔吗？",
+        "成就也还算不赖吗？",
+        "这一路风雨兼程，每一刻都值得反复怀念",
+        "2020，一切从零出发",
+        "成就也还算不赖吗？",
+        "站在未来十年的时间起点上，想必你也感慨良多",
+        "现在，不妨提笔，写一封信",
+        "告诉TA未来十年，您有哪些期许",
+        "而收件人，是未来的自己"
+      ],
+      data: []
+    };
+  },
   methods: {
     swipeHandler() {
-      this.$router.push('/info');
+      this.$router.push("/info");
+    },
+    addDate() {
+      var tiems = setInterval(() => {
+        console.log(111);
+        if (this.data.length === this.originData.length) {
+          clearInterval(tiems);
+          return;
+        }
+        this.data.push(this.originData[this.data.length - 1]);
+      }, 1000);
     }
+  },
+  mounted() {
+    this.addDate();
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
 .bg {
   height: 100%;
   background-image: url("../assets/loading/BG.png");
@@ -102,19 +148,15 @@ export default {
       position: absolute;
       width: 52.5px;
       bottom: 40px;
-	  animation: mymove 2s linear infinite;
-	  
-	  @keyframes mymove {
-	  	0% {
-	  			bottom: 40px;
-	  		/*开始为原始大小*/
-	  	}
-	  
-	  	100% {
-	  			bottom: 60px;
-	  	}
-	  
-	  }
+      animation: mymove 1.3s ease-in-out infinite alternate;
+      @keyframes mymove {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(0, 6px);
+        }
+      }
     }
   }
 }
