@@ -1,8 +1,8 @@
 <template>
 	<div class="bg" v-touch:swipe.bottom="swipeHandler" v-touch:longtap="longtapHandler">
 		<div class="loading">
-			<img src="@/assets/index/Logo.png" class="logo" alt />
-			<img src="@/assets/result/文案.png" class="ten-years" alt />
+			<img src="http://cdn.hwzhj.top/Logo.png" class="logo" alt />
+			<img src="http://cdn.hwzhj.top/文案.png" class="ten-years" alt />
 			<div :class="showBg">
 				<p class="secret-text">
 					<span>{{userInfo.userName}}：</span>
@@ -15,13 +15,13 @@
 		</div>
 
 		<div class="shareWx" @click="hiddenImage" v-show="wxImageShow">
-			<img class="wxImage" src="@/assets/result/微信内-分享提示.png" />
+			<img class="wxImage" src="http://cdn.hwzhj.top/微信内-分享提示.png" />
 		</div>
 		
 		<div class="bg" ref="imageWrapper">
 			<div class="loading">
-				<img src="@/assets/index/Logo.png" class="logo" alt />
-				<img src="@/assets/result/文案.png" class="ten-years" alt />
+				<img src="http://cdn.hwzhj.top/Logo.png" class="logo" alt />
+				<img src="http://cdn.hwzhj.top/文案.png" class="ten-years" alt />
 				<div :class="showBg">
 					<p class="secret-text">
 						<span>{{userInfo.userName}}：</span>
@@ -30,7 +30,7 @@
 						</ol>
 					</p>
 				</div>
-				<img src="@/assets/result/别人查看-引导.png" class="qrCode" alt />
+				<img src="http://cdn.hwzhj.top/别人查看-引导.png" class="qrCode" alt />
 			</div>
 		</div>
 	</div>
@@ -121,7 +121,7 @@
 <style lang="scss" scoped>
 	.bg {
 		height: 100%;
-		background-image: url("../assets/loading/BG.png");
+		background-image: url("http://cdn.hwzhj.top/BG.png");
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
@@ -167,7 +167,7 @@
 				width: 100%;
 				height: 400px;
 				top: 160px;
-				background-image: url("../assets/result/60保密.png");
+				background-image: url("http://cdn.hwzhj.top/60保密.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 
@@ -197,30 +197,30 @@
 			}
 
 			.six {
-				background-image: url("../assets/result/60保密.png");
+				background-image: url("http://cdn.hwzhj.top/60保密.png");
 			}
 
 			.seven {
-				background-image: url("../assets/result/保密70.png");
+				background-image: url("http://cdn.hwzhj.top/保密70.png");
 			}
 
 			.eight {
-				background-image: url("../assets/result/80保密.png");
+				background-image: url("http://cdn.hwzhj.top/80保密.png");
 			}
 
 			.nine {
-				background-image: url("../assets/result/90保密.png");
+				background-image: url("http://cdn.hwzhj.top/90保密.png");
 			}
 
 			.zero {
-				background-image: url("../assets/result/00保密.png");
+				background-image: url("http://cdn.hwzhj.top/00保密.png");
 			}
 
 			.share {
 				position: absolute;
 				width: 150px;
 				top: 580px;
-				background-image: url("../assets/result/分享.png");
+				background-image: url("http://cdn.hwzhj.top/分享.png");
 				background-size: contain;
 				height: 58px;
 				background-repeat: no-repeat;
