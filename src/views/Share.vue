@@ -3,15 +3,11 @@
 		<div class="loading">
 			<img src="@/assets/index/Logo.png" class="logo" alt />
 			<img src="@/assets/result/文案.png" class="ten-years" alt />
-			<div class="secret">
+			<div :class="showBg">
 				<p class="secret-text">
-					<span>郑小耿：</span>
+					<span>{{userInfo.userName}}：</span>
 					<ol>
-						<li>每周打卡一部电影</li>
-						<li>消灭豆瓣必看书单</li>
-						<li>学会用镜头留下最美的风景</li>
-						<li>走出舒适圈</li>
-						<li>掌握一门新语言</li>
+						<li v-for="da in selectedData">{{da}}</li>
 					</ol>
 				</p>
 			</div>
@@ -21,7 +17,47 @@
 </template>
 
 <script>
+	import {
+		mapMutations,
+		mapState
+	} from "vuex";
 	export default {
+		data() {
+			return {
+				bg: [{
+					name: '60',
+					path: '60保密.png',
+					class: 'six'
+				},{
+					name: '70',
+					path: '保密70.png',
+					class: 'seven'
+				},{
+					name: '80',
+					path: '80保密.png',
+					class: 'eight'
+				},{
+					name: '90',
+					path: '90保密.png',
+					class: 'nine'
+				},{
+					name: '00',
+					path: '00保密.png',
+					class: 'zero'
+				}],
+				dataLength: 0,
+				showBg: 'secret six',
+			};
+		},
+		computed: {
+			...mapState(["userInfo","selectedData"]),
+		},
+		mounted() {
+			const bg = this.bg.find(item => {
+				return item.name == this.userInfo.userYear
+			})
+			this.showBg = "secret " + bg.class || "secret";
+		},
 		methods: {
 			swipeHandler() {
 				this.$router.back();
@@ -65,9 +101,10 @@
 				height: 400px;
 				top: 160px;
 				background-image: url("../assets/result/60保密.png");
-				background-repeat:no-repeat;
+				background-repeat: no-repeat;
 				background-size: cover;
-				.secret-text{
+
+				.secret-text {
 					position: absolute;
 					width: 80%;
 					top: 30px;
@@ -75,21 +112,39 @@
 					font-size: 18px;
 					font-weight: 200;
 					color: #2b5259;
-					ol{
+
+					ol {
 						position: absolute;
 						font-size: 16px;
 						width: 100%;
 						top: 30px;
 						left: 20px;
 						list-style: decimal;
-						li{
+
+						li {
 							line-height: 26px;
 						}
 					}
 				}
+				
 			}
-			
-			.share{
+			.six{
+				background-image: url("../assets/result/60保密.png");
+			}
+			.seven{
+				background-image: url("../assets/result/保密70.png");
+			}
+			.eight{
+				background-image: url("../assets/result/80保密.png");
+			}
+			.nine{
+				background-image: url("../assets/result/90保密.png");
+			}
+			.zero{
+				background-image: url("../assets/result/00保密.png");
+			}
+
+			.share {
 				position: absolute;
 				width: 150px;
 				top: 580px;
