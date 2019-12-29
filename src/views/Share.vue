@@ -98,7 +98,9 @@
 					this.imgUrl = dataURL;
 					if (this.imgUrl !== "") {
 						this.showImgModel = true;
-						this.saveFile(this.imgUrl,'xxx.png');
+						setTimeout(()=>{
+							this.saveFile(this.imgUrl,'share.png');
+						}, 1000);
 					}
 				});
 			},
