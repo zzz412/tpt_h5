@@ -24,7 +24,7 @@ body,
 #app {
   height: 100%;
   font-size: 37.5px;
-  background-image: url("./assets/loading/BG.png");
+  // background-image: url("./assets/loading/BG.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;

@@ -20,12 +20,12 @@
         <!-- <div v-for="da in showData">
 					<div>{{da}}</div>
         </div>-->
-        <img class="toast-bg" src="@/assets/select/选择提示.png" alt />
+        <img class="toast-bg" src="http://cdn.hwzhj.top/选择提示.png" alt />
       </div>
 
       <div class="button">
-        <img src="@/assets/select/换一换.png" @click="changeDataHandler" class="change" alt />
-        <img src="@/assets/select/确定按钮.png" class="sure" @click="swipeTopHandler" />
+        <img src="http://cdn.hwzhj.top/换一换.png" @click="changeDataHandler" class="change" alt />
+        <img src="http://cdn.hwzhj.top/确定按钮.png" class="sure" @click="swipeTopHandler" />
       </div>
     </div>
   </div>
@@ -133,7 +133,7 @@ export default {
 <style lang="scss" scoped>
 .bg {
   height: 100%;
-  background-image: url("../assets/loading/BG.png");
+  background-image: url("http://cdn.hwzhj.top/BG.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;

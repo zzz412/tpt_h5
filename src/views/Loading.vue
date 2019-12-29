@@ -43,7 +43,7 @@ export default {
 <style lang="scss" scoped>
 .bg {
   height: 100%;
-  background-image: url("../assets/loading/BG.png");
+  background-image: url("http://cdn.hwzhj.top/BG.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -71,7 +71,7 @@ export default {
         overflow: hidden;
       }
       .line {
-        background-image: url("../assets/loading/钢笔轨迹.png");
+        background-image: url("http://cdn.hwzhj.top/钢笔轨迹.png");
         width: 215px;
         height: 20px;
         left: -215px;
@@ -85,7 +85,7 @@ export default {
         }
       }
       .pen {
-        background-image: url("../assets/loading/钢笔.png");
+        background-image: url("http://cdn.hwzhj.top/钢笔.png");
         width: 103px;
         height: 84px;
         top: -64px;
@@ -104,7 +104,7 @@ export default {
       .loading_text {
         width: 70px;
         height: 40px;
-        background-image: url("../assets/loading/加载中.png");
+        background-image: url("http://cdn.hwzhj.top/加载中.png");
         top: 0;
         left: calc(50% - 35px);
       }
