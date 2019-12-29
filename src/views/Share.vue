@@ -33,18 +33,40 @@
 				<img src="http://cdn.hwzhj.top/别人查看-引导.png" class="qrCode" alt />
 			</div>
 		</div>
+		<Popup v-model="show">
+			<div class="bg" ref="imageWrapper">
+				<div class="loading">
+					<img src="http://cdn.hwzhj.top/Logo.png" class="logo" alt />
+					<img src="http://cdn.hwzhj.top/文案.png" class="ten-years" alt />
+					<div :class="showBg">
+						<p class="secret-text">
+							<span>{{userInfo.userName}}：</span>
+							<ol>
+								<li v-for="(da,index) in selectedData" :key="index">{{da}}</li>
+							</ol>
+						</p>
+					</div>
+					<img src="http://cdn.hwzhj.top/别人查看-引导.png" class="qrCode" alt />
+				</div>
+			</div>
+		</Popup>
 	</div>
 </template>
 
 <script>
+	import { Popup, Toast } from "vant";
 	import html2canvas from "html2canvas"
 	import {
 		mapMutations,
 		mapState
 	} from "vuex";
 	export default {
+		components: {
+			Popup
+		},
 		data() {
 			return {
+				show:true,
 				bg: [{
 					name: '60',
 					path: '60保密.png',
@@ -233,5 +255,11 @@
 				left: 7px;
 			}
 		}
+		.van-popup{
+			width: 100%;
+			height: 100%;
+		}
 	}
+	
 </style>
+
