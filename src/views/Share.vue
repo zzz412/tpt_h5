@@ -2,8 +2,8 @@
 	<div>
 		<div class="bg" ref="imageWrapper">
 			<div class="loading">
-				<img src="@/assets/index/Logo.png" class="logo" alt />
-				<img src="@/assets/result/文案.png" class="ten-years" alt />
+				<img src="http://cdn.hwzhj.top/Logo.png" class="logo" alt />
+				<img src="http://cdn.hwzhj.top/文案.png" class="ten-years" alt />
 				<div :class="showBg">
 					<p class="secret-text">
 						<span>{{userInfo.userName}}：</span>
@@ -12,7 +12,7 @@
 						</ol>
 					</p>
 				</div>
-				<img src="@/assets/result/别人查看-引导.png" class="qrCode" alt />
+				<img src="http://cdn.hwzhj.top/别人查看-引导.png" class="qrCode" alt />
 			</div>
 		</div>
 	<div class="bg" v-touch:swipe.bottom="swipeHandler" v-touch:longtap="longtapHandler">
