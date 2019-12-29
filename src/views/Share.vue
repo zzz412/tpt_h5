@@ -97,7 +97,7 @@
 				this.$router.back();
 			},
 			longtapHandler() {
-				html2canvas(this.$refs.imageWrapper).then(canvas => {
+				html2canvas(this.$refs.imageWrapper,{useCORS:true}).then(canvas => {
 					let dataURL = canvas.toDataURL("image/png");
 					this.imgUrl = dataURL;
 					if (this.imgUrl !== "") {
