@@ -35,7 +35,7 @@
 <style lang="scss" scoped>
 	.bg {
 		height: 100%;
-		background-image: url("../assets/loading/BG.png");
+		background-image: url("http://cdn.hwzhj.top/BG.png");
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
@@ -53,7 +53,7 @@
 				width: 60%;
 				height: 80%;
 				top: 100px;
-				background-image: url("../assets/transform2/信箱.png");
+				background-image: url("http://cdn.hwzhj.top/信箱.png");
 				background-size: contain;
 				background-repeat: no-repeat;
 				background-position: 50% 50%;
@@ -63,7 +63,7 @@
 				position: absolute;
 				width: 90%;
 				height: 78%;
-				background-image: url("../assets/transform2/信件.png");
+				background-image: url("http://cdn.hwzhj.top/信件.png");
 				background-size: contain;
 				background-repeat: no-repeat;
 				background-position: 50% 50%;

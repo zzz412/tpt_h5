@@ -5,7 +5,7 @@
         <div class="top">
           <div class="text">你的信件署名</div>
           <div class="input_bg">
-            <input type="text" placeholder="署名..." maxlength="10" v-model="userName" />
+            <Field type="text" placeholder="署名..." maxlength="10" v-model="userName" />
           </div>
         </div>
       </transition>
@@ -28,13 +28,14 @@
 </template>
 
 <script>
-import { Picker, Popup, Toast } from "vant";
+import { Picker, Popup, Toast, Field } from "vant";
 //导入vuex state mutations辅助方法
 import { mapMutations, mapState } from "vuex";
 export default {
   components: {
     Picker,
-    Popup
+    Popup,
+    Field
   },
   mounted() {
     this.year = this.userInfo.userYear || "90";
@@ -80,7 +81,6 @@ export default {
   height: 100%;
   background-image: url("../assets/loading/BG.png");
   height: 100%;
-  background-image: url(/img/BG.3edc58dd.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -108,21 +108,6 @@ export default {
         background: url("../assets/info/署名底框.png") no-repeat;
         background-size: 100%;
         margin-top: 20px;
-        input {
-          width: 100%;
-          background-color: transparent;
-          border: none;
-          outline: none;
-          font-size: 25px;
-          color: transparent;
-          text-shadow: 0 0 0 #c06c2c;
-          // color: #c06c2c;
-          text-align: center;
-          margin-top: 6px;
-          &::placeholder {
-            color: #c06c2c;
-          }
-        }
       }
     }
     .bottom {
@@ -160,6 +145,29 @@ export default {
           transform: translate(0, 6px);
         }
       }
+    }
+  }
+}
+</style>
+<style lang="scss" >
+.input_bg {
+  .van-cell{
+    padding: 0;
+    background: transparent;
+  }
+  .van-field__control {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 25px;
+    color: transparent;
+    text-shadow: 0 0 0 #c06c2c;
+    // color: #c06c2c;
+    text-align: center;
+    margin-top: 6px;
+    &::placeholder {
+      color: #c06c2c;
     }
   }
 }

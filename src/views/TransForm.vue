@@ -10,14 +10,14 @@
         <div class="clock">
           <p>{{num}}</p>
           <span class="raduis"></span>
-          <img class="bg_clock" src="@/assets/transform/信纸.png" alt />
-          <img class="bg_hour" src="@/assets/transform/指针-短.png" alt />
-          <img class="bg_minute" src="@/assets/transform/指针-长.png" alt />
+          <img class="bg_clock" src="http://cdn.hwzhj.top/信纸.png" alt />
+          <img class="bg_hour" src="http://cdn.hwzhj.top/指针-短.png" alt />
+          <img class="bg_minute" src="http://cdn.hwzhj.top/指针-长.png" alt />
         </div>
       </transition>
       <!-- <div class="bg_clock"></div> -->
 
-      <img src="@/assets/index/向上滑动.png" class="up" alt />
+      <img src="http://cdn.hwzhj.top/向上滑动.png" class="up" alt />
     </div>
   </div>
 </template>
@@ -104,9 +104,8 @@ export default {
 }
 .bg {
   height: 100%;
-  background-image: url("../assets/loading/BG.png");
+  background-image: url("http://cdn.hwzhj.top/BG.png");
   height: 100%;
-  background-image: url(/img/BG.3edc58dd.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -131,7 +130,7 @@ export default {
       position: absolute;
       width: 200px;
       height: 160px;
-      background: url("../assets/transform/表盘.png") no-repeat;
+      background: url("http://cdn.hwzhj.top/表盘.png") no-repeat;
       background-size: 100%;
       top: 400px;
       display: flex;
