@@ -153,9 +153,13 @@ export default {
 	  			bottom: 40px;
 	  		/*开始为原始大小*/
 	  	}
+		
+		50% {
+				bottom: 60px;
+		}
 	  
 	  	100% {
-	  			bottom: 60px;
+	  			bottom: 40px;
 	  	}
 	  
 	  }
