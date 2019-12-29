@@ -1,5 +1,5 @@
 <template>
-	<div class="bg" v-touch:swipe.bottom="swipeHandler">
+	<div class="bg" v-touch:swipe.bottom="swipeHandler"  v-touch:longtap="longtapHandler">
 		<div class="loading">
 			<img src="@/assets/index/Logo.png" class="logo" alt />
 			<img src="@/assets/result/文案.png" class="ten-years" alt />
@@ -11,7 +11,8 @@
 					</ol>
 				</p>
 			</div>
-			<img src="@/assets/result/分享.png" class="share" alt />
+			<img v-if="!showQrCode" src="@/assets/result/分享.png" class="share" alt />
+			<img v-else src="@/assets/result/别人查看-引导.png" class="qrCode" alt />
 		</div>
 	</div>
 </template>
@@ -28,39 +29,43 @@
 					name: '60',
 					path: '60保密.png',
 					class: 'six'
-				},{
+				}, {
 					name: '70',
 					path: '保密70.png',
 					class: 'seven'
-				},{
+				}, {
 					name: '80',
 					path: '80保密.png',
 					class: 'eight'
-				},{
+				}, {
 					name: '90',
 					path: '90保密.png',
 					class: 'nine'
-				},{
+				}, {
 					name: '00',
 					path: '00保密.png',
 					class: 'zero'
 				}],
 				dataLength: 0,
 				showBg: 'secret six',
+				showQrCode: false,
 			};
 		},
 		computed: {
-			...mapState(["userInfo","selectedData"]),
+			...mapState(["userInfo", "selectedData"]),
 		},
 		mounted() {
 			const bg = this.bg.find(item => {
 				return item.name == this.userInfo.userYear
-			})
+			}) || {class: ''}
 			this.showBg = "secret " + bg.class || "secret";
 		},
 		methods: {
 			swipeHandler() {
 				this.$router.back();
+			},
+			longtapHandler() {
+				this.showQrCode = true;
 			}
 		}
 	};
@@ -126,21 +131,26 @@
 						}
 					}
 				}
-				
+
 			}
-			.six{
+
+			.six {
 				background-image: url("../assets/result/60保密.png");
 			}
-			.seven{
+
+			.seven {
 				background-image: url("../assets/result/保密70.png");
 			}
-			.eight{
+
+			.eight {
 				background-image: url("../assets/result/80保密.png");
 			}
-			.nine{
+
+			.nine {
 				background-image: url("../assets/result/90保密.png");
 			}
-			.zero{
+
+			.zero {
 				background-image: url("../assets/result/00保密.png");
 			}
 
@@ -148,6 +158,13 @@
 				position: absolute;
 				width: 150px;
 				top: 580px;
+			}
+			
+			.qrCode{
+				position: absolute;
+				width: 7rem;
+				top: 15.46667rem;
+				left: 7px;
 			}
 		}
 	}

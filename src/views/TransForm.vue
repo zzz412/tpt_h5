@@ -2,16 +2,6 @@
   <div class="bg" v-touch:swipe.top="swipeHandler">
     <div class="loading">
       <div class="text">
-        <!-- <p>回首来路，这十年你过得如何？</p>
-        <p>坚持的事能令你无悔吗？</p>
-        <p>成就也还算不赖吗？</p>
-        <p>这一路风雨兼程，每一刻都值得反复怀念</p>
-        <p>2020，一切从零出发</p>
-        <p>成就也还算不赖吗？</p>
-        <p>站在未来十年的时间起点上，想必你也感慨良多</p>
-        <p>现在，不妨提笔，写一封信</p>
-        <p>告诉TA未来十年，您有哪些期许</p>
-        <p>而收件人，是未来的自己</p>-->
         <transition-group name="list">
           <p v-for="(item ,index) in data" :key="index">{{item}}</p>
         </transition-group>
@@ -53,8 +43,9 @@ export default {
       this.$router.push("/info");
     },
     addDate() {
+      this.data.push(this.originData[this.data.length - 1]);
       var tiems = setInterval(() => {
-        console.log(111);
+        // console.log(111);
         if (this.data.length === this.originData.length) {
           clearInterval(tiems);
           return;
