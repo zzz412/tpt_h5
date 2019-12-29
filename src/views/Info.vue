@@ -18,7 +18,7 @@
           </div>
         </div>
       </transition>
-      <img src="@/assets/index/向上滑动.png" class="up" alt />
+      <img src="http://cdn.hwzhj.top/向上滑动.png" class="up" alt />
     </div>
     <Popup v-model="show" position="bottom">
       <!-- <div></div> -->
@@ -79,7 +79,7 @@ export default {
 <style lang="scss" scoped>
 .bg {
   height: 100%;
-  background-image: url("../assets/loading/BG.png");
+  background-image: url("http://cdn.hwzhj.top/BG.png");
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -105,7 +105,7 @@ export default {
       .input_bg {
         width: 200px;
         height: 47px;
-        background: url("../assets/info/署名底框.png") no-repeat;
+        background: url("http://cdn.hwzhj.top/署名底框.png") no-repeat;
         background-size: 100%;
         margin-top: 20px;
       }
@@ -116,7 +116,7 @@ export default {
       .year_bg {
         width: 200px;
         height: 156px;
-        background: url("../assets/info/年代-背景.png") no-repeat;
+        background: url("http://cdn.hwzhj.top/年代-背景.png") no-repeat;
         background-size: 100%;
         margin-top: 20px;
         position: relative;
