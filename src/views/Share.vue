@@ -11,13 +11,18 @@
 					</ol>
 				</p>
 			</div>
-			<img v-if="!showQrCode" src="@/assets/result/分享.png" class="share" alt />
+			<img v-if="!showQrCode" src="@/assets/result/分享.png" @click="showWxImage" class="share" alt />
 			<img v-else src="@/assets/result/别人查看-引导.png" class="qrCode" alt />
 		</div>
 		<Popup :show="showImgModel">
 			123
 			<img :src="imgUrl" class="qrCode" />
 		</Popup>
+		
+		
+		<div class="shareWx" @click="hiddenImage" v-show="wxImageShow">
+			<img class="wxImage" src="@/assets/result/微信内-分享提示.png" />
+		</div>
 	</div>
 </template>
 
@@ -60,6 +65,7 @@
 				showQrCode: false,
 				imgUrl: '',
 				showImgModel: false,
+				wxImageShow: false,
 			};
 		},
 		computed: {
@@ -74,6 +80,14 @@
 			this.showBg = "secret " + bg.class || "secret";
 		},
 		methods: {
+			// 显示分享
+			showWxImage(){
+				this.wxImageShow = true;
+			},
+			// 隐藏分享图标
+			hiddenImage(){
+				this.wxImageShow = false;
+			},
 			swipeHandler() {
 				this.$router.back();
 			},
@@ -109,7 +123,20 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
-
+		
+		.shareWx{
+			position: absolute;
+			margin: 0 auto;
+			height: 100%;
+			width: 100%;
+			top: 0px;
+			display: flex;
+			justify-content: center;
+			.wxImage{
+				width: 100%;
+			}
+		}
+		
 		.loading {
 			position: relative;
 			margin: 0 auto;
