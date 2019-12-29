@@ -131,6 +131,7 @@
 			margin: 0 auto;
 			height: 100%;
 			width: 100%;
+			top: 0px;
 			display: flex;
 			justify-content: center;
 			z-index: 999;
