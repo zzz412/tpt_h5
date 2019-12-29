@@ -14,16 +14,24 @@
 			<img v-if="!showQrCode" src="@/assets/result/分享.png" class="share" alt />
 			<img v-else src="@/assets/result/别人查看-引导.png" class="qrCode" alt />
 		</div>
+		<Popup :show="showImgModel">
+			123
+			<img :src="imgUrl" class="qrCode" />
+		</Popup>
 	</div>
 </template>
 
 <script>
+	import { Popup } from "vant";
 	import html2canvas from "html2canvas"
 	import {
 		mapMutations,
 		mapState
 	} from "vuex";
 	export default {
+		components: {
+		  Popup
+		},
 		data() {
 			return {
 				bg: [{
@@ -51,6 +59,7 @@
 				showBg: 'secret six',
 				showQrCode: false,
 				imgUrl: '',
+				showImgModel: false,
 			};
 		},
 		computed: {
@@ -74,13 +83,15 @@
 					let dataURL = canvas.toDataURL("image/png");
 					this.imgUrl = dataURL;
 					if (this.imgUrl !== "") {
-						this.saveFile(this.imgUrl,'xxx.png');
+						this.showImgModel = true;
+						console.log(this.showImgModel)
+						// this.saveFile(this.imgUrl,'xxx.png');
 					}
 				});
 			},
 			saveFile(data, filename){
 				let save_link = document.createElement('a');
-				save_link.href = "data:image/png;base64," + data;
+				save_link.href = data;
 				save_link.download = filename;
 			
 				let event = document.createEvent('MouseEvents');
