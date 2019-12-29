@@ -1,1 +1,2 @@
 export const CHANGE_USERINFO = 'CHANGE_USERINFO';
+export const CHANGE_ROUTER = 'CHANGE_ROUTER';

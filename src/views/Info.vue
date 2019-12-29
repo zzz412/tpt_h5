@@ -1,19 +1,23 @@
 <template>
   <div class="bg" v-touch:swipe.bottom="swipeHandler" v-touch:swipe.top="swipeTopHandler">
     <div class="loading">
-      <div class="top">
-        <div class="text">你的信件署名</div>
-        <div class="input_bg">
-          <input type="text" placeholder="署名..." maxlength="10" v-model="userName" />
+      <transition name="txt" appear>
+        <div class="top">
+          <div class="text">你的信件署名</div>
+          <div class="input_bg">
+            <input type="text" placeholder="署名..." maxlength="10" v-model="userName" />
+          </div>
         </div>
-      </div>
-      <div class="bottom">
-        <div class="text">你生于哪个年代</div>
-        <div class="year_bg" @click="show=true">
-          <span>{{year[0]}}</span>
-          <span>{{year[1]}}</span>
+      </transition>
+      <transition name="txt" appear>
+        <div class="bottom">
+          <div class="text">你生于哪个年代</div>
+          <div class="year_bg" @click="show=true">
+            <span>{{year[0]}}</span>
+            <span>{{year[1]}}</span>
+          </div>
         </div>
-      </div>
+      </transition>
       <img src="@/assets/index/向上滑动.png" class="up" alt />
     </div>
     <Popup v-model="show" position="bottom">
@@ -50,7 +54,7 @@ export default {
   methods: {
     ...mapMutations(["CHANGE_USERINFO"]),
     swipeHandler() {
-      this.$router.back();
+      // this.$router.back();
     },
     swipeTopHandler() {
       if (!this.userName) {
@@ -59,7 +63,8 @@ export default {
       }
       // 页面离开时保存用户信息
       this.CHANGE_USERINFO({ userName: this.userName, userYear: this.year });
-      this.$router.push("/select");
+      // this.$router.push("/select");
+      this.$store.commit("CHANGE_ROUTER", "Select");
     },
     onConfirm(value) {
       console.log(value);

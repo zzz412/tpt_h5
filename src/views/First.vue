@@ -1,8 +1,12 @@
 <template>
   <div class="bg" v-touch:swipe.top="swipeHandler">
     <div class="loading">
-      <img src="@/assets/index/Logo.png" class="logo" alt />
-      <img src="@/assets/index/文字.png" class="txt" alt />
+      <transition name="txt" appear>
+        <img src="@/assets/index/Logo.png" class="logo" alt />
+      </transition>
+      <transition name="txt" appear>
+        <img src="@/assets/index/文字.png" class="txt" alt />
+      </transition>
       <img src="@/assets/index/向上滑动.png" class="up" alt />
       <!-- <div class="loading-top">
         <div class="amd line"></div>
@@ -19,8 +23,9 @@
 export default {
   methods: {
     swipeHandler() {
-      console.log(11);
-      this.$router.push("/transform");
+      // console.log(11);
+      // this.$router.push("/transform");
+      this.$store.commit("CHANGE_ROUTER", "TransForm");
     }
   }
 };

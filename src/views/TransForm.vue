@@ -6,12 +6,15 @@
           <p v-for="(item ,index) in data" :key="index">{{item}}</p>
         </transition-group>
       </div>
-      <div class="clock">
-        <p>2020</p>
-        <img class="bg_clock" src="@/assets/transform/信纸.png" alt />
-        <img class="bg_hour" src="@/assets/transform/指针-短.png" alt />
-        <img class="bg_minute" src="@/assets/transform/指针-长.png" alt />
-      </div>
+      <transition name="list" appear>
+        <div class="clock">
+          <p>{{num}}</p>
+          <span class="raduis"></span>
+          <img class="bg_clock" src="@/assets/transform/信纸.png" alt />
+          <img class="bg_hour" src="@/assets/transform/指针-短.png" alt />
+          <img class="bg_minute" src="@/assets/transform/指针-长.png" alt />
+        </div>
+      </transition>
       <!-- <div class="bg_clock"></div> -->
 
       <img src="@/assets/index/向上滑动.png" class="up" alt />
@@ -35,27 +38,52 @@ export default {
         "告诉TA未来十年，您有哪些期许",
         "而收件人，是未来的自己"
       ],
-      data: []
+      data: [],
+      num: 2020,
+      loading: false
     };
   },
   methods: {
     swipeHandler() {
-      this.$router.push("/info");
+      this.$store.commit("CHANGE_ROUTER", "Info");
     },
     addDate() {
       this.data.push(this.originData[this.data.length - 1]);
       var tiems = setInterval(() => {
-        // console.log(111);
         if (this.data.length === this.originData.length) {
           clearInterval(tiems);
           return;
         }
         this.data.push(this.originData[this.data.length - 1]);
       }, 1000);
+    },
+    /**
+     * 数字滚动
+     * @param {Object} num 		开始值
+     * @param {Object} maxNum	最大值,最终展示的值
+     */
+    numRunFun(num, maxNum) {
+      var numText = num;
+      var golb; // 为了清除requestAnimationFrame
+      const numSlideFun = () => {
+        numText += 0.02; // 速度的计算可以为小数
+        if (numText >= maxNum) {
+          numText = maxNum;
+          cancelAnimationFrame(golb);
+        } else {
+          golb = requestAnimationFrame(numSlideFun);
+        }
+        this.num = ~~numText;
+      };
+      numSlideFun();
     }
+    // 运行
+    // numRunFun(0,10)
   },
   mounted() {
     this.addDate();
+    this.numRunFun(2020, 2030);
+    this.loading = true;
   }
 };
 </script>
@@ -109,6 +137,18 @@ export default {
       display: flex;
       align-items: flex-end;
       justify-content: center;
+      .raduis {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #87462c;
+        border-radius: 50%;
+        overflow: hidden;
+        position: absolute;
+        top: 95px;
+        left: 96px;
+        z-index: 99;
+      }
       .bg_clock {
         position: absolute;
         width: 251px;
@@ -121,12 +161,16 @@ export default {
         top: 50px;
         left: 96px;
         position: absolute;
+        transform-origin: right bottom;
+        animation: clock 10s ease-out forwards;
       }
       .bg_minute {
         position: absolute;
         width: 34px;
-        top: 47px;
-        left: 67px;
+        top: 46px;
+        left: 68px;
+        transform-origin: right bottom;
+        animation: minter 60s ease-out forwards;
       }
       p {
         color: #fff;
@@ -147,6 +191,26 @@ export default {
         to {
           transform: translate(0, 6px);
         }
+      }
+    }
+    @keyframes minter {
+      from {
+        transform: rotate(-50deg);
+        top: 46px;
+        left: 68px;
+      }
+      to {
+        transform: rotate(100deg);
+        top: 48px;
+        left: 64px;
+      }
+    }
+    @keyframes clock {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(30deg);
       }
     }
   }

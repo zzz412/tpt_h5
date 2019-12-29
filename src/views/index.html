@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>无标题文档</title>
+    <script type="text/javascript">
+        //定义全局变量
+        var img_width_min = 15;
+        var img_width_max = 80;
+        var x_left = 0;
+        var x_right = 0;
+        var y_top = 0;
+        var y_bottom = 0;
+
+        //定义初始化的函数
+        function init() {
+            document.body.bgColor = "#000";
+            x_right = window.innerWidth - img_width_max;
+            y_bottom = window.innerHeight - img_width_max;
+            //定时器
+            setInterval("showStar()", 1000);
+        }
+        //显示星星
+        function showStar() {
+            //创建一个图片
+            var node_img = document.createElement("img");
+            //随机图片大小和随机坐标
+            var width = getRandom(img_width_min, img_width_max);
+            var x = getRandom(x_left, x_right);
+            var y = getRandom(y_top, y_bottom);
+            //增加src的属性
+            node_img.setAttribute("src", "images/xingxing.gif");
+            //增加style属性
+            var style = "position:absolute;left:" + x + "px;top:" + y + "px;";
+            style += "width:" + width + "px;";
+            node_img.setAttribute("style", style);
+            //增加一个onclick事件属性
+            node_img.setAttribute("onclick", "removeImg(this)");
+            //将图片追加到<body>元素下
+            document.body.appendChild(node_img);
+        }
+
+        function removeImg(obj) {
+            document.body.removeChild(obj);
+        }
+
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+    </script>
+</head>
+
+<body onload="init()">
+</body>
+
+</html>

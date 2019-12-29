@@ -17,7 +17,8 @@
 		},
 		mounted() {
 			this.timeOutObj = setTimeout(() => {
-				this.$router.push("/share");
+				// this.$router.push("/share");
+      			this.$store.commit("CHANGE_ROUTER", "Share");
 			}, 3000)
 		},
 		methods: {

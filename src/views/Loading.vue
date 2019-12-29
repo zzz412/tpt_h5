@@ -2,7 +2,9 @@
   <div class="bg" v-touch:swipe.top="swipeHandler">
     <div class="loading">
       <div class="loading-top">
-        <div class="amd line"></div>
+        <div class="amdline">
+          <div class="amd line"></div>
+        </div>
         <div class="amd pen"></div>
       </div>
       <div class="loading-bottom">
@@ -11,7 +13,7 @@
       <!-- <van-button @click="fade=!fade">点我</van-button>
       <transition name="van-slide-up">
         <div v-show="fade">Slide Up</div>
-      </transition> -->
+      </transition>-->
     </div>
   </div>
 </template>
@@ -25,10 +27,15 @@ export default {
   },
   methods: {
     swipeHandler() {
-      console.log(11);
-      this.$router.push("/home");
+      // console.log(11);
+      // this.$router.push("/home");
     }
     // goHome()
+  },
+  mounted() {
+    setTimeout(() => {
+      this.$router.push("/home");
+    }, 5000);
   }
 };
 </script>
@@ -55,19 +62,40 @@ export default {
       height: 28px;
       //   background: red;
       display: flex;
+      .amdline {
+        width: 215px;
+        height: 20px;
+        position: absolute;
+        left: 64px;
+        top: 0;
+        overflow: hidden;
+      }
       .line {
         background-image: url("../assets/loading/钢笔轨迹.png");
         width: 215px;
         height: 20px;
-        left: 64px;
-        top: 0;
+        left: -215px;
+        animation: line 5s ease-out forwards;
+        // left: 64px;
+        // top: 0;
+      }
+      @keyframes line {
+        100% {
+          left: 0;
+        }
       }
       .pen {
         background-image: url("../assets/loading/钢笔.png");
         width: 103px;
         height: 84px;
         top: -64px;
-        left: 227px;
+        left: 12px;
+        animation: pen 5s ease-out forwards;
+      }
+      @keyframes pen {
+        100% {
+          left: 227px;
+        }
       }
     }
     .loading-bottom {

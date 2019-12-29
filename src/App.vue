@@ -30,4 +30,11 @@ body,
   background-position: 50% 50%;
   overflow: hidden;
 }
+.txt-enter {
+  opacity: 0;
+  transform: translateX(50px);
+}
+.txt-enter-active {
+  transition: all 0.7s;
+}
 </style>
