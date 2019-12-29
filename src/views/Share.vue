@@ -17,7 +17,7 @@
 		<div class="shareWx" @click="hiddenImage" v-show="wxImageShow">
 			<img class="wxImage" src="http://cdn.hwzhj.top/微信内-分享提示.png" />
 		</div>
-		
+
 		<div class="bg" ref="imageWrapper">
 			<div class="loading">
 				<img src="http://cdn.hwzhj.top/Logo.png" class="logo" alt />
@@ -36,14 +36,17 @@
 		<Popup v-model="show" style="width: 80%;">
 			<div style="text-align: center;font-size:22px;margin: 10px 0px;">长按保存图片</div>
 			<div style="text-align: center;font-size:22px;margin: 10px 0px;">
-				<img :src="imgUrl" style="width: 90%;"/>
+				<img :src="imgUrl" style="width: 90%;" />
 			</div>
 		</Popup>
 	</div>
 </template>
 
 <script>
-	import { Popup, Toast } from "vant";
+	import {
+		Popup,
+		Toast
+	} from "vant";
 	import html2canvas from "html2canvas"
 	import {
 		mapMutations,
@@ -108,12 +111,19 @@
 				this.$router.back();
 			},
 			longtapHandler() {
-				html2canvas(this.$refs.imageWrapper,{useCORS:true}).then(canvas => {
+				html2canvas(this.$refs.imageWrapper, {
+					useCORS: true
+				}).then(canvas => {
 					let dataURL = canvas.toDataURL("image/png");
 					this.imgUrl = dataURL;
 					if (this.imgUrl !== "") {
-						this.show = true;
-						// this.saveFile(this.imgUrl, 'share.jpg');
+						var ua = window.navigator.userAgent.toLowerCase();
+						//通过正则表达式匹配ua中是否含有MicroMessenger字符串
+						if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+							this.show = true;
+						} else {
+							this.saveFile(this.imgUrl, 'share.jpg');
+						}
 					}
 				});
 			},
@@ -245,11 +255,10 @@
 				left: 7px;
 			}
 		}
-		.van-popup{
+
+		.van-popup {
 			width: 100%;
 			height: 100%;
 		}
 	}
-	
 </style>
-
