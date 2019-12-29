@@ -1,5 +1,5 @@
 <template>
-	<div class="bg" v-touch:swipe.bottom="swipeHandler"  v-touch:longtap="longtapHandler">
+	<div class="bg" v-touch:swipe.bottom="swipeHandler"  v-touch:longtap="longtapHandler" ref="imageWrapper">
 		<div class="loading">
 			<img src="@/assets/index/Logo.png" class="logo" alt />
 			<img src="@/assets/result/文案.png" class="ten-years" alt />
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+	import html2canvas from "html2canvas"
 	import {
 		mapMutations,
 		mapState
@@ -49,6 +50,7 @@
 				dataLength: 0,
 				showBg: 'secret six',
 				showQrCode: false,
+				imgUrl: '',
 			};
 		},
 		computed: {
@@ -57,7 +59,9 @@
 		mounted() {
 			const bg = this.bg.find(item => {
 				return item.name == this.userInfo.userYear
-			}) || {class: ''}
+			}) || {
+				class: ''
+			}
 			this.showBg = "secret " + bg.class || "secret";
 		},
 		methods: {
@@ -66,6 +70,22 @@
 			},
 			longtapHandler() {
 				this.showQrCode = true;
+				html2canvas(this.$refs.imageWrapper).then(canvas => {
+					let dataURL = canvas.toDataURL("image/png");
+					this.imgUrl = dataURL;
+					if (this.imgUrl !== "") {
+						this.saveFile(this.imgUrl,'xxx.png');
+					}
+				});
+			},
+			saveFile(data, filename){
+				let save_link = document.createElement('a');
+				save_link.href = "data:image/png;base64," + data;
+				save_link.download = filename;
+			
+				let event = document.createEvent('MouseEvents');
+				event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+				save_link.dispatchEvent(event);
 			}
 		}
 	};
@@ -159,8 +179,8 @@
 				width: 150px;
 				top: 580px;
 			}
-			
-			.qrCode{
+
+			.qrCode {
 				position: absolute;
 				width: 7rem;
 				top: 15.46667rem;
