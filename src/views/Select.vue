@@ -1,10 +1,8 @@
 <template>
-  <div class="bg" v-touch:swipe.bottom="swipeHandler">
-    <div class="loading">
-      <div class="tab">
-        <div
-          class="tag tag-default"
-          :class="[
+	<div class="bg" v-touch:swipe.bottom="swipeHandler">
+		<div class="loading">
+			<div class="tab">
+				<div class="tag tag-default" :class="[
 				isFx(index)?'tag-fx2':'tag-fx1',
 				{
 				'tag-check':da.check,
@@ -13,231 +11,258 @@
 				'tag-light':da.color === 2
 				}
 			]"
-          v-for="(da,index) in showData"
-          :key="index"
-          @click="tagChecked(index)"
-        >{{da.txt}}</div>
-        <!-- <div v-for="da in showData">
+				 v-for="(da,index) in showData" :key="index" @click="tagChecked(index)">{{da.txt}}</div>
+				<!-- <div v-for="da in showData">
 					<div>{{da}}</div>
         </div>-->
-        <img class="toast-bg" src="http://cdn.hwzhj.top/选择提示.png" alt />
-      </div>
-
-      <div class="button">
-        <img src="http://cdn.hwzhj.top/换一换.png" @click="changeDataHandler" class="change" alt />
-        <img src="http://cdn.hwzhj.top/确定按钮.png" class="sure" @click="swipeTopHandler" />
-      </div>
-    </div>
-  </div>
+				<img class="toast-bg" src="http://cdn.hwzhj.top/选择提示.png" alt />
+			</div>
+			
+			<div class="statistics">
+				已选择 {{selectedData.length}} / 5
+			</div>
+			<div class="button">
+				<img src="http://cdn.hwzhj.top/换一换.png" @click="changeDataHandler" class="change" alt />
+				<img src="http://cdn.hwzhj.top/确定按钮.png" class="sure" @click="swipeTopHandler" />
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
-import { Picker, Popup, Toast } from "vant";
-import { mapMutations, mapState } from "vuex";
-import dataJson from "../utils/data.js";
-export default {
-  data() {
-    return {
-      data: dataJson,
-      dataLength: 0,
-      showData: []
-    };
-  },
-  computed: {
-    ...mapState(["userInfo", "selectedData"]),
-    originData() {
-      return this.data[
-        Object.keys(this.data).find(item =>
-          item.includes(this.userInfo.userYear)
-        )
-      ];
-    }
-  },
-  mounted() {
-    this.creatData();
-    for (let i = 0, len = this.showData.length; i < len; i++) {
-      const isHas = this.selectedData.find(item => {
-        return item == this.showData[i].txt;
-      });
-      if (isHas) {
-        this.showData[i].check = true;
-      }
-    }
-  },
-  methods: {
-    ...mapMutations(["changeSelectedData"]),
-    isFx(index) {
-      if (index == 0) return true;
-      if (index % 3 == 0) return true;
-      return false;
-    },
-    // 选择标签
-    tagChecked(index) {
-      if (this.showData[index].check) {
-        this.showData[index].check = !this.showData[index].check;
-      } else {
-        if (this.selectedData.length > 4) {
-          Toast("最多选择5个");
-          return;
-        }
-        this.showData[index].check = !this.showData[index].check;
-      }
-      this.changeSelectedData([]);
-      for (let i = 0, len = this.showData.length; i < len; i++) {
-        if (this.showData[i].check) {
-          this.selectedData.push(this.showData[i].txt);
-        }
-      }
-    },
-    swipeHandler() {
-      //   this.$router.back();
-    },
-    swipeTopHandler() {
-      this.changeSelectedData(this.selectedData);
-      if (this.selectedData.length < 1) {
-        Toast("最少选择1个");
-        return;
-      }
-      //   this.$router.push("/transition");
-      this.$store.commit("CHANGE_ROUTER", "MyTransition");
-    },
-    changeDataHandler() {
-      this.dataLength++;
-      if (this.dataLength > this.originData.length - 1) {
-        this.dataLength = 0;
-      }
-      this.creatData();
-      for (let i = 0, len = this.showData.length; i < len; i++) {
-        const isHas = this.selectedData.find(item => {
-          return item == this.showData[i].txt;
-        });
-        if (isHas) {
-          this.showData[i].check = true;
-        }
-      }
-    },
-    // 生成数据
-    creatData() {
-      this.showData = this.originData[this.dataLength].data.map(item => {
-        return {
-          check: false,
-          txt: item,
-          color: Math.floor(Math.random() * 3)
-        };
-      });
-    }
-  }
-};
+	import {
+		Picker,
+		Popup,
+		Toast
+	} from "vant";
+	import {
+		mapMutations,
+		mapState
+	} from "vuex";
+	import dataJson from "../utils/data.js";
+	export default {
+		data() {
+			return {
+				data: dataJson,
+				dataLength: 0,
+				showData: []
+			};
+		},
+		computed: {
+			...mapState(["userInfo", "selectedData"]),
+			originData() {
+				return this.data[
+					Object.keys(this.data).find(item =>
+						item.includes(this.userInfo.userYear)
+					)
+				];
+			}
+		},
+		mounted() {
+			this.creatData();
+			for (let i = 0, len = this.showData.length; i < len; i++) {
+				const isHas = this.selectedData.find(item => {
+					return item == this.showData[i].txt;
+				});
+				if (isHas) {
+					this.showData[i].check = true;
+				}
+			}
+		},
+		methods: {
+			...mapMutations(["changeSelectedData"]),
+			isFx(index) {
+				if (index == 0) return true;
+				if (index % 3 == 0) return true;
+				return false;
+			},
+			// 选择标签
+			tagChecked(index) {
+				if (this.showData[index].check) {
+					this.showData[index].check = !this.showData[index].check;
+					const data = this.selectedData.findIndex(item => {
+						return item == this.showData[index].txt
+					})
+					if (data != -1) {
+						this.selectedData.splice(data, 1);
+						this.changeSelectedData(this.selectedData);
+					}
+
+				} else {
+					if (this.selectedData.length > 4) {
+						Toast("最多选择5个");
+						return;
+					}
+					this.showData[index].check = !this.showData[index].check;
+					this.selectedData.push(this.showData[index].txt);
+					this.changeSelectedData(this.selectedData);
+				}
+			},
+			swipeHandler() {
+				//   this.$router.back();
+			},
+			swipeTopHandler() {
+				this.changeSelectedData(this.selectedData);
+				if (this.selectedData.length < 1) {
+					Toast("最少选择1个");
+					return;
+				}
+				//   this.$router.push("/transition");
+				this.$store.commit("CHANGE_ROUTER", "MyTransition");
+			},
+			changeDataHandler() {
+				this.dataLength++;
+				if (this.dataLength > this.originData.length - 1) {
+					this.dataLength = 0;
+				}
+				this.creatData();
+				for (let i = 0, len = this.showData.length; i < len; i++) {
+					const isHas = this.selectedData.find(item => {
+						return item == this.showData[i].txt;
+					});
+					if (isHas) {
+						this.showData[i].check = true;
+					}
+				}
+			},
+			// 生成数据
+			creatData() {
+				this.showData = this.originData[this.dataLength].data.map(item => {
+					return {
+						check: false,
+						txt: item,
+						color: Math.floor(Math.random() * 3)
+					};
+				});
+			}
+		}
+	};
 </script>
 
 <style lang="scss" scoped>
-.bg {
-  height: 100%;
-  background-image: url("http://cdn.hwzhj.top/BG.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
+	.bg {
+		height: 100%;
+		background-image: url("http://cdn.hwzhj.top/BG.jpg");
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
 
-  .loading {
-    position: relative;
-    margin: 0 auto;
-    height: 100%;
-    width: 95%;
-    display: flex;
-    justify-content: center;
+		.loading {
+			position: relative;
+			margin: 0 auto;
+			height: 100%;
+			width: 95%;
+			display: flex;
+			justify-content: center;
 
-    .tab {
-      color: #fff;
-      font-size: 12px;
-      width: 100%;
-      top: 80px;
-      position: absolute;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      .toast-bg {
-        position: absolute;
-        width: 38px;
-        right: 40px;
-        bottom: -40px;
-        animation: mymove 1.3s ease-in-out infinite alternate;
-      }
-      @keyframes mymove {
-        from {
-          transform: translate(0, 0);
-          opacity: 1;
-        }
-        to {
-          transform: translate(0, 6px);
-          opacity: 0.5;
-        }
-      }
-      .tag {
-        box-sizing: border-box;
-        border-radius: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 6px 8px;
-        line-height: 1.5;
-      }
+			.tab {
+				color: #fff;
+				font-size: 12px;
+				width: 100%;
+				top: 80px;
+				position: absolute;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
 
-      .tag-fx1 {
-        width: 47%;
-        margin: 8px 4px;
-        white-space: nowrap;
-      }
+				.toast-bg {
+					position: absolute;
+					width: 38px;
+					right: 40px;
+					bottom: -40px;
+					animation: mymove 1.3s ease-in-out infinite alternate;
+				}
 
-      .tag-fx2 {
-        width: 47%;
-        margin: 8px 10%;
-        white-space: nowrap;
-      }
+				@keyframes mymove {
+					from {
+						transform: translate(0, 0);
+						opacity: 1;
+					}
 
-      .tag-default {
-        color: #ac6622;
-        border: 1px solid #ac6622;
-      }
+					to {
+						transform: translate(0, 6px);
+						opacity: 0.5;
+					}
+				}
 
-      .tag-dark {
-        color: #f1deaa;
-        background: #ac6622;
-        border: 1px solid #ac6622;
-      }
+				.tag {
+					box-sizing: border-box;
+					border-radius: 20px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					text-align: center;
+					padding: 6px 8px;
+					line-height: 1.5;
+				}
 
-      .tag-light {
-        color: #fff;
-        background: transparent;
-        border: 1px solid #fff;
-      }
+				.tag-fx1 {
+					width: 47%;
+					margin: 8px 4px;
+					white-space: nowrap;
+				}
 
-      .tag-check {
-        color: #ac6622;
-        border: 1px solid #fff;
-        background: #fff;
-      }
-    }
+				.tag-fx2 {
+					width: 47%;
+					margin: 8px 10%;
+					white-space: nowrap;
+				}
 
-    .button {
-      position: absolute;
-      width: 100%;
-      height: 160px;
-      top: 560px;
-      text-align: center;
+				.tag-default {
+					color: #ac6622;
+					border: 1px solid #ac6622;
+				}
 
-      .change {
-        position: absolute;
-        width: 100px;
-        left: 40px;
-      }
+				.tag-dark {
+					color: #f1deaa;
+					background: #ac6622;
+					border: 1px solid #ac6622;
+				}
 
-      .sure {
-        position: absolute;
-        width: 100px;
-        right: 40px;
-      }
-    }
-  }
-}
+				.tag-light {
+					color: #fff;
+					background: transparent;
+					border: 1px solid #fff;
+				}
+
+				.tag-check {
+					color: #ac6622;
+					border: 1px solid #fff;
+					background: #fff;
+				}
+			}
+			
+			.statistics{
+				position: absolute;
+				width: 80%;
+				height: 120px;
+				top: 430px;
+				text-align: center;
+				font-size: 14px;
+				color: #dbdbdb;
+				line-height: 120px;
+				// background: #FFFFFF;
+			}
+			
+			.button {
+				position: absolute;
+				width: 100%;
+				height: 160px;
+				top: 560px;
+				text-align: center;
+
+				.change {
+					position: absolute;
+					width: 100px;
+					left: 40px;
+				}
+
+				.sure {
+					position: absolute;
+					width: 100px;
+					right: 40px;
+				}
+			}
+		}
+	}
 </style>

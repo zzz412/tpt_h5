@@ -19,7 +19,7 @@
 			this.timeOutObj = setTimeout(() => {
 				// this.$router.push("/share");
       			this.$store.commit("CHANGE_ROUTER", "Share");
-			}, 3000)
+			}, 2000)
 		},
 		methods: {
 			swipeHandler() {
@@ -67,7 +67,7 @@
 				background-size: contain;
 				background-repeat: no-repeat;
 				background-position: 50% 50%;
-				animation: mymove 3.3s linear infinite alternate;
+				animation: mymove 2.3s linear infinite alternate;
 
 				@keyframes mymove {
 					0% {
