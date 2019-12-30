@@ -206,10 +206,10 @@
 				.bg_clock {
 					position: absolute;
 					width: 251px;
-					height: 140px;
+					height: 240px;
 					top: -35px;
-					left: -40px;
-					animation: baidong 1.3s ease-in-out infinite alternate;
+					// left: -40px;
+					animation: fly 8s ease-out forwards;
 				}
 
 				.bg_hour {
@@ -293,6 +293,23 @@
 					// height: 140px;
 				}
 			}
+			
+			@keyframes fly {
+				from {
+					width: 300%;
+					height: 240px;
+					top: -35px;
+					// height: 140px;
+				}
+			
+				to {
+					width: 0%;
+					height: 0px;
+					top: 100px;
+					// height: 140px;
+				}
+			}
+			
 		}
 	}
 </style>
