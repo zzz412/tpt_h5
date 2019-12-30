@@ -35,10 +35,9 @@ export default {
         "成就也还算不赖吗？",
         "这一路风雨兼程，每一刻都值得反复怀念",
         "2020，一切从零出发",
-        "成就也还算不赖吗？",
         "站在未来十年的时间起点上，想必你也感慨良多",
         "现在，不妨提笔，写一封信",
-        "告诉TA未来十年，您有哪些期许",
+        "告诉TA未来十年，你有哪些期许",
         "而收件人，是未来的自己"
       ],
       data: [],
@@ -51,13 +50,13 @@ export default {
       this.$store.commit("CHANGE_ROUTER", "Info");
     },
     addDate() {
-      this.data.push(this.originData[this.data.length - 1]);
+      this.data.push(this.originData[0]);
       var tiems = setInterval(() => {
         if (this.data.length === this.originData.length) {
           clearInterval(tiems);
           return;
         }
-        this.data.push(this.originData[this.data.length - 1]);
+        this.data.push(this.originData[this.data.length]);
       }, 700);
     },
     /**

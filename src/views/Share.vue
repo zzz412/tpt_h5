@@ -2,7 +2,7 @@
 	<div class="bg" v-touch:swipe.bottom="swipeHandler" v-touch:longtap="longtapHandler">
 		<div class="loading">
 			<img src="http://cdn.hwzhj.top/Logo.png" class="logo" alt />
-			<img src="http://cdn.hwzhj.top/文案.png" class="ten-years" alt />
+			<img src="http://cdn.hwzhj.top/主标题.png" class="ten-years" alt />
 			<div :class="showBg">
 				<p class="secret-text">
 					<span>{{userInfo.userName}}：</span>

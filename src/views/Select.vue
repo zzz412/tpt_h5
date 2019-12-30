@@ -8,7 +8,7 @@
 				'tag-check':da.check,
 				'tag-default':da.color === 0,
 				'tag-dark':da.color === 1,
-				'tag-light':da.color === 2
+				'tag-light':!da.check
 				}
 			]"
 				 v-for="(da,index) in showData" :key="index" @click="tagChecked(index)">{{da.txt}}</div>
@@ -131,7 +131,7 @@
 					return {
 						check: false,
 						txt: item,
-						color: Math.floor(Math.random() * 3)
+						// color: Math.floor(Math.random() * 3)
 					};
 				});
 			}

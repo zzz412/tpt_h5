@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="bg" v-touch:swipe.top="swipeTopHandler"> -->
-  <div class="bg" v-touch:start.stop="start" v-touch:end.stop="swipeHandler">
+  <div class="bg">
     <div class="loading">
       <transition name="txt" appear>
         <div class="top">
@@ -12,15 +12,16 @@
       </transition>
       <transition name="txt" appear>
         <div class="bottom">
-          <div class="text">你生于哪个年代</div>
+          <div class="text">拨动数字 选择你的年代</div>
           <!-- <div class="year_bg" @click="show=true"> -->
           <div class="year_bg" v-touch:swipe.top="yearTop" v-touch:swipe.bottom="yearBottom">
-            <span>{{year[0]}}</span>
-            <span>{{year[1]}}</span>
+            <span>{{yearCopy[2]}}</span>
+            <span>{{yearCopy[3]}}</span>
           </div>
+          <div class="text2">滑动选择</div>
         </div>
       </transition>
-      <img src="http://cdn.hwzhj.top/向上滑动.png" class="up" alt />
+      <img src="http://cdn.hwzhj.top/开始写信.png" class="up" alt @click="goPage" />
     </div>
     <Popup v-model="show" position="bottom">
       <!-- <div></div> -->
@@ -44,7 +45,8 @@ export default {
     SwipeItem
   },
   mounted() {
-    this.year = this.userInfo.userYear || "90";
+    this.year = this.userInfo.userYear || "1990";
+    this.yearCopy = this.year;
     this.userName = this.userInfo.userName || "";
   },
   computed: {
@@ -53,8 +55,9 @@ export default {
   data() {
     return {
       show: false,
-      columns: ["60", "70", "80", "90", "00"],
-      year: "90",
+      columns: ["1960", "1970", "1980", "1990", "2000"],
+      year: "1990",
+      yearCopy: "1990",
       userName: ""
     };
   },
@@ -67,7 +70,10 @@ export default {
         return;
       }
       // 页面离开时保存用户信息
-      this.CHANGE_USERINFO({ userName: this.userName, userYear: this.year });
+      this.CHANGE_USERINFO({
+        userName: this.userName,
+        userYear: this.year.slice(2)
+      });
       // this.$router.push("/select");
       this.$store.commit("CHANGE_ROUTER", "Select");
     },
@@ -76,6 +82,7 @@ export default {
       this.year = value;
       this.show = false;
     },
+    // 数字牌上滑
     yearTop(a, e) {
       e.stopPropagation();
       // [].
@@ -85,8 +92,10 @@ export default {
       } else {
         index++;
       }
-      this.year = this.columns[index];
+      // this.year = this.columns[index];
+      this.numRunFun(this.year - 0, this.columns[index] - 0);
     },
+    // 数字牌下滑
     yearBottom(a, e) {
       e.stopPropagation();
       // [].
@@ -96,9 +105,50 @@ export default {
       } else {
         index--;
       }
-      this.year = this.columns[index];
+      // this.year = this.columns[index];
+      console.log(this.year - 0);
+      console.log(this.columns[index] - 0);
+      this.numRunFun(this.year - 0, this.columns[index] - 0);
+    },
+    /**
+     * 数字滚动
+     * @param {Object} num 		开始值
+     * @param {Object} maxNum	最大值,最终展示的值
+     */
+    numRunFun(num, maxNum) {
+      var numText = num;
+      var golb; // 为了清除requestAnimationFrame
+      if (maxNum > num) {
+        var numSlideFun = () => {
+          numText += 1; // 速度的计算可以为小数
+          if (numText >= maxNum) {
+            numText = maxNum;
+            cancelAnimationFrame(golb);
+          } else {
+            golb = requestAnimationFrame(numSlideFun);
+            this.year = ~~numText + 1 + "";
+          }
+          this.yearCopy = ~~numText + "";
+        };
+      } else {
+        var numSlideFun = () => {
+          numText -= 1; // 速度的计算可以为小数
+          if (numText <= maxNum) {
+            numText = maxNum;
+            cancelAnimationFrame(golb);
+          } else {
+            golb = requestAnimationFrame(numSlideFun);
+            this.year = ~~numText - 1 + "";
+          }
+          this.yearCopy = ~~numText + "";
+        };
+      }
+      numSlideFun();
     }
   }
+  // mounted() {
+  //   this.numRunFun(1000, 0);
+  // }
 };
 </script>
 
@@ -125,9 +175,10 @@ export default {
       line-height: 1.8;
       text-align: center;
     }
+
     .top {
       position: absolute;
-      top: 80px;
+      top: 100px;
       .input_bg {
         width: 200px;
         height: 47px;
@@ -138,7 +189,7 @@ export default {
     }
     .bottom {
       position: absolute;
-      top: 312px;
+      top: 245px;
       .year_bg {
         width: 200px;
         height: 156px;
@@ -156,21 +207,28 @@ export default {
           color: #c16929;
         }
       }
+      .text2 {
+        color: #a24b0b;
+        font-size: 15px;
+        width: 100%;
+        line-height: 1.8;
+        text-align: center;
+      }
     }
 
     .up {
       position: absolute;
-      width: 52.5px;
-      bottom: 40px;
-      animation: mymove 1.3s ease-in-out infinite alternate;
-      @keyframes mymove {
-        from {
-          transform: translate(0, 0);
-        }
-        to {
-          transform: translate(0, 6px);
-        }
-      }
+      width: 112.5px;
+      top: 540px;
+      // animation: mymove 1.3s ease-in-out infinite alternate;
+      // @keyframes mymove {
+      //   from {
+      //     transform: translate(0, 0);
+      //   }
+      //   to {
+      //     transform: translate(0, 6px);
+      //   }
+      // }
     }
   }
 }
