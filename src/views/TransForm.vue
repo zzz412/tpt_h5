@@ -1,5 +1,5 @@
 <template>
-  <div class="bg" v-touch:swipe.top="swipeHandler">
+  <div class="bg" v-touch:start="start" v-touch:end="swipeHandler">
     <div class="loading">
       <div class="text">
         <transition-group name="list">
@@ -23,7 +23,10 @@
 </template>
 
 <script>
+import mixins from "@/mixins/touchu";
 export default {
+  mixins: [mixins],
+
   data() {
     return {
       originData: [
@@ -44,7 +47,7 @@ export default {
     };
   },
   methods: {
-    swipeHandler() {
+    goPage() {
       this.$store.commit("CHANGE_ROUTER", "Info");
     },
     addDate() {
@@ -55,7 +58,7 @@ export default {
           return;
         }
         this.data.push(this.originData[this.data.length - 1]);
-      }, 1000);
+      }, 700);
     },
     /**
      * 数字滚动
@@ -66,7 +69,7 @@ export default {
       var numText = num;
       var golb; // 为了清除requestAnimationFrame
       const numSlideFun = () => {
-        numText += 0.02; // 速度的计算可以为小数
+        numText += 0.04; // 速度的计算可以为小数
         if (numText >= maxNum) {
           numText = maxNum;
           cancelAnimationFrame(golb);
@@ -104,7 +107,7 @@ export default {
 }
 .bg {
   height: 100%;
-  background-image: url("http://cdn.hwzhj.top/BG.png");
+  background-image: url("http://cdn.hwzhj.top/BG.jpg");
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -154,7 +157,9 @@ export default {
         height: 140px;
         top: -35px;
         left: -40px;
+        animation: baidong 1.3s ease-in-out infinite alternate;
       }
+
       .bg_hour {
         width: 6px;
         top: 50px;
@@ -169,7 +174,7 @@ export default {
         top: 46px;
         left: 68px;
         transform-origin: right bottom;
-        animation: minter 60s ease-out forwards;
+        animation: minter 10s ease-out forwards;
       }
       p {
         color: #fff;
@@ -212,6 +217,22 @@ export default {
         transform: rotate(30deg);
       }
     }
+    @keyframes baidong {
+      from {
+        transform: rotate(-10deg);
+        width: 241px;
+        opacity: 0.7;
+        // height: 140px;
+      }
+      to {
+        transform: rotate(10deg);
+        width: 261px;
+        opacity: 1;
+        // height: 140px;
+      }
+    }
   }
 }
 </style>
+
+

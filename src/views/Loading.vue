@@ -35,7 +35,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.$router.replace("/home");
-    }, 5000);
+    }, 2000);
   }
 };
 </script>
@@ -43,7 +43,7 @@ export default {
 <style lang="scss" scoped>
 .bg {
   height: 100%;
-  background-image: url("http://cdn.hwzhj.top/BG.png");
+  background-image: url("http://cdn.hwzhj.top/BG.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -75,7 +75,7 @@ export default {
         width: 215px;
         height: 20px;
         left: -215px;
-        animation: line 5s ease-out forwards;
+        animation: line 2s ease-out forwards;
         // left: 64px;
         // top: 0;
       }
@@ -90,7 +90,7 @@ export default {
         height: 84px;
         top: -64px;
         left: 12px;
-        animation: pen 5s ease-out forwards;
+        animation: pen 2s ease-out forwards;
       }
       @keyframes pen {
         100% {

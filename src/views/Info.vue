@@ -1,5 +1,6 @@
 <template>
-  <div class="bg" v-touch:swipe.bottom="swipeHandler" v-touch:swipe.top="swipeTopHandler">
+  <!-- <div class="bg" v-touch:swipe.top="swipeTopHandler"> -->
+  <div class="bg" v-touch:start.stop="start" v-touch:end.stop="swipeHandler">
     <div class="loading">
       <transition name="txt" appear>
         <div class="top">
@@ -12,7 +13,8 @@
       <transition name="txt" appear>
         <div class="bottom">
           <div class="text">你生于哪个年代</div>
-          <div class="year_bg" @click="show=true">
+          <!-- <div class="year_bg" @click="show=true"> -->
+          <div class="year_bg" v-touch:swipe.top="yearTop" v-touch:swipe.bottom="yearBottom">
             <span>{{year[0]}}</span>
             <span>{{year[1]}}</span>
           </div>
@@ -28,14 +30,18 @@
 </template>
 
 <script>
-import { Picker, Popup, Toast, Field } from "vant";
+import { Picker, Popup, Toast, Field, Swipe, SwipeItem } from "vant";
 //导入vuex state mutations辅助方法
+import mixins from "@/mixins/touchu";
 import { mapMutations, mapState } from "vuex";
 export default {
+  mixins: [mixins],
   components: {
     Picker,
     Popup,
-    Field
+    Field,
+    Swipe,
+    SwipeItem
   },
   mounted() {
     this.year = this.userInfo.userYear || "90";
@@ -54,10 +60,8 @@ export default {
   },
   methods: {
     ...mapMutations(["CHANGE_USERINFO"]),
-    swipeHandler() {
-      // this.$router.back();
-    },
-    swipeTopHandler() {
+    goPage() {
+      if (this.show) return;
       if (!this.userName) {
         Toast("请填写信件署名");
         return;
@@ -71,6 +75,28 @@ export default {
       // console.log(value);
       this.year = value;
       this.show = false;
+    },
+    yearTop(a, e) {
+      e.stopPropagation();
+      // [].
+      let index = this.columns.findIndex(item => item === this.year);
+      if (index == this.columns.length - 1) {
+        index = 0;
+      } else {
+        index++;
+      }
+      this.year = this.columns[index];
+    },
+    yearBottom(a, e) {
+      e.stopPropagation();
+      // [].
+      let index = this.columns.findIndex(item => item === this.year);
+      if (index == 0) {
+        index = this.columns.length - 1;
+      } else {
+        index--;
+      }
+      this.year = this.columns[index];
     }
   }
 };
@@ -79,7 +105,7 @@ export default {
 <style lang="scss" scoped>
 .bg {
   height: 100%;
-  background-image: url("http://cdn.hwzhj.top/BG.png");
+  background-image: url("http://cdn.hwzhj.top/BG.jpg");
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -151,7 +177,7 @@ export default {
 </style>
 <style lang="scss" >
 .input_bg {
-  .van-cell{
+  .van-cell {
     padding: 0;
     background: transparent;
   }

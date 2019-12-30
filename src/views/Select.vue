@@ -133,7 +133,7 @@ export default {
 <style lang="scss" scoped>
 .bg {
   height: 100%;
-  background-image: url("http://cdn.hwzhj.top/BG.png");
+  background-image: url("http://cdn.hwzhj.top/BG.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;

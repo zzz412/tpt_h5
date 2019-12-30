@@ -11,14 +11,19 @@
 					</ol>
 				</p>
 			</div>
-			<div class="share" @click="showWxImage"></div>
+			<div class="bottom-share">
+				<!-- <div class="share" @click="showWxImage"></div> -->
+				<div class="downApp" @click="goDown"></div>
+				<div class="share" @click="showWxImage"></div>
+				<div class="share-txt">长按保存图片</div>
+			</div>
 		</div>
 
 		<div class="shareWx" @click="hiddenImage" v-show="wxImageShow">
 			<img class="wxImage" src="http://cdn.hwzhj.top/微信内-分享提示.png" />
 		</div>
 
-		<div class="bg" ref="imageWrapper">
+		<div class="bg" ref="imageWrapper" style="">
 			<div class="loading">
 				<img src="http://cdn.hwzhj.top/Logo.png" class="logo" alt />
 				<img src="http://cdn.hwzhj.top/文案.png" class="ten-years" alt />
@@ -30,11 +35,11 @@
 						</ol>
 					</p>
 				</div>
-				<img src="http://cdn.hwzhj.top/别人查看-引导.png" class="qrCode" alt />
+				<img src="http://cdn.hwzhj.top/qr.png" class="qrCode" alt />
 			</div>
 		</div>
 		<Popup v-model="show" style="width: 80%;">
-			<div style="text-align: center;font-size:22px;margin: 10px 0px;">长按保存图片</div>
+			<div class="txt">长按保存图片</div>
 			<div style="text-align: center;font-size:22px;margin: 10px 0px;">
 				<img :src="imgUrl" style="width: 90%;" />
 			</div>
@@ -48,6 +53,7 @@
 		Toast
 	} from "vant";
 	import html2canvas from "html2canvas"
+	import * as TPTJS from 'tpt-js-sdk'
 	import {
 		mapMutations,
 		mapState
@@ -102,17 +108,24 @@
 			// 显示分享
 			showWxImage() {
 				this.wxImageShow = true;
+				const shareInfo = {
+					title: '给未来十年的自己|我想对你说…',
+					imgUrl: 'http://cdn.hwzhj.top/分享页面.jpg',
+					url: 'http://zeng.pub/tpth5',
+					content: '在吗？我是十年后的你，你有什么想对我说？'
+				}
+				TPTJS.tpH5Share(shareInfo);
 			},
 			// 隐藏分享图标
 			hiddenImage() {
 				this.wxImageShow = false;
 			},
 			swipeHandler() {
-				this.$router.back();
+				// this.$router.back();
 			},
 			longtapHandler() {
 				html2canvas(this.$refs.imageWrapper, {
-					useCORS: true
+					useCORS: true,
 				}).then(canvas => {
 					let dataURL = canvas.toDataURL("image/png");
 					this.imgUrl = dataURL;
@@ -135,6 +148,9 @@
 				let event = document.createEvent('MouseEvents');
 				event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
 				save_link.dispatchEvent(event);
+			},
+			goDown(){
+				window.open('https://ecustomer.cntaiping.com/static/download/#xiaZaiAPP?source=1')
 			}
 		}
 	};
@@ -143,11 +159,11 @@
 <style lang="scss" scoped>
 	.bg {
 		height: 100%;
-		background-image: url("http://cdn.hwzhj.top/BG.png");
+		background-image: url("http://cdn.hwzhj.top/BG.jpg");
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
-
+		user-select:none;
 		.shareWx {
 			position: absolute;
 			margin: 0 auto;
@@ -189,10 +205,10 @@
 				width: 100%;
 				height: 400px;
 				top: 160px;
-				background-image: url("http://cdn.hwzhj.top/60保密.png");
+				background-image: url("http://cdn.hwzhj.top/60保密filter.png");
 				background-repeat: no-repeat;
 				background-size: cover;
-
+				user-select:none;
 				.secret-text {
 					position: absolute;
 					width: 80%;
@@ -201,6 +217,7 @@
 					font-size: 18px;
 					font-weight: 200;
 					color: #2b5259;
+					user-select:none;
 
 					ol {
 						position: absolute;
@@ -209,9 +226,11 @@
 						top: 30px;
 						left: 20px;
 						list-style: decimal;
+						user-select:none;
 
 						li {
 							line-height: 26px;
+							user-select:none;
 						}
 					}
 				}
@@ -219,33 +238,55 @@
 			}
 
 			.six {
-				background-image: url("http://cdn.hwzhj.top/60保密.png");
+				background-image: url("http://cdn.hwzhj.top/60保密filter.png");
 			}
 
 			.seven {
-				background-image: url("http://cdn.hwzhj.top/保密70.png");
+				background-image: url("http://cdn.hwzhj.top/70保密filter.png");
 			}
 
 			.eight {
-				background-image: url("http://cdn.hwzhj.top/80保密.png");
+				background-image: url("http://cdn.hwzhj.top/80保密filter.png");
 			}
 
 			.nine {
-				background-image: url("http://cdn.hwzhj.top/90保密.png");
+				background-image: url("http://cdn.hwzhj.top/90保密filter.png");
 			}
 
 			.zero {
-				background-image: url("http://cdn.hwzhj.top/00保密.png");
+				background-image: url("http://cdn.hwzhj.top/00保密filter.png");
 			}
-
-			.share {
+			.bottom-share{
+				width: 100%;
 				position: absolute;
-				width: 150px;
+				height: 30px;
+				display: flex;
+				justify-content: space-around;
+				// bottom: 55px;
 				top: 580px;
-				background-image: url("http://cdn.hwzhj.top/分享.png");
+			}
+			.downApp {
+				width: 131px;
+				background-image: url("http://cdn.hwzhj.top/下载app.png");
 				background-size: contain;
 				height: 58px;
 				background-repeat: no-repeat;
+			}
+			.share {
+				width: 131px;
+				background-image: url("http://cdn.hwzhj.top/share.png");
+				background-size: contain;
+				height: 58px;
+				background-repeat: no-repeat;
+			}
+			.share-txt{
+				position: absolute;
+				font-size: 12px;
+				color: #b45c16;
+				width: 100%;
+				bottom: -35px;
+				text-align: center;
+				user-select:none;
 			}
 
 			.qrCode {
@@ -257,8 +298,14 @@
 		}
 
 		.van-popup {
-			width: 100%;
-			height: 100%;
+			background: transparent;
+			.txt{
+				text-align: center;
+				font-size:22px;
+				margin: 10px 0px;
+				color:#fff;
+				user-select:none;
+			}
 		}
 	}
 </style>
