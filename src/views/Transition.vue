@@ -1,6 +1,14 @@
 <template>
 	<div class="bg" v-touch:swipe.bottom="swipeHandler">
 		<div class="loading">
+			<div class="rain one" style="left: 2%;"></div>
+			<div class="rain three" style="left: 10%;"></div>
+			<div class="rain two" style="left: 25%;"></div>
+			<div class="rain five" style="left: 45%;"></div>
+			<div class="rain three" style="left: 58%;"></div>
+			<div class="rain four" style="left: 72%;"></div>
+			<div class="rain two" style="left: 88%;"></div>
+			<div class="rain five" style="left: 96%;"></div>
 			<div class="mail"></div>
 			<div class="star"></div>
 		</div>
@@ -18,7 +26,7 @@
 		mounted() {
 			this.timeOutObj = setTimeout(() => {
 				// this.$router.push("/share");
-      			this.$store.commit("CHANGE_ROUTER", "Share");
+				this.$store.commit("CHANGE_ROUTER", "Share");
 			}, 2000)
 		},
 		methods: {
@@ -39,6 +47,43 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
+
+		.rain {
+			width: 2px;
+			height: 135px;
+			background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
+			position: absolute;
+		}
+
+		.one {
+			animation: downRain 1.5s infinite;
+		}
+
+		.two {
+			animation: downRain 1.3s infinite;
+		}
+
+		.three {
+			animation: downRain 1.8s infinite;
+		}
+
+		.four {
+			animation: downRain 1.9s infinite;
+		}
+
+		.five {
+			animation: downRain 2.2s infinite;
+		}
+
+		@keyframes downRain {
+			0% {
+				top: -10px;
+			}
+
+			100% {
+				top: 100%;
+			}
+		}
 
 		.loading {
 			position: relative;

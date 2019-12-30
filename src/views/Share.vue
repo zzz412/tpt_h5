@@ -1,6 +1,14 @@
 <template>
 	<div class="bg" v-touch:swipe.bottom="swipeHandler" v-touch:longtap="longtapHandler">
 		<div class="loading">
+			<div class="rain one" style="left: 2%;"></div>
+			<div class="rain three" style="left: 10%;"></div>
+			<div class="rain two" style="left: 25%;"></div>
+			<div class="rain five" style="left: 45%;"></div>
+			<div class="rain three" style="left: 58%;"></div>
+			<div class="rain four" style="left: 72%;"></div>
+			<div class="rain two" style="left: 88%;"></div>
+			<div class="rain five" style="left: 96%;"></div>
 			<img src="http://cdn.hwzhj.top/Logo.png" class="logo" alt />
 			<img src="http://cdn.hwzhj.top/主标题.png" class="ten-years" alt />
 			<div :class="showBg">
@@ -149,7 +157,7 @@
 				event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
 				save_link.dispatchEvent(event);
 			},
-			goDown(){
+			goDown() {
 				window.open('https://ecustomer.cntaiping.com/static/download/#xiaZaiAPP?source=1')
 			}
 		}
@@ -163,7 +171,8 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
-		user-select:none;
+		user-select: none;
+
 		.shareWx {
 			position: absolute;
 			margin: 0 auto;
@@ -176,6 +185,43 @@
 
 			.wxImage {
 				width: 100%;
+			}
+		}
+
+		.rain {
+			width: 2px;
+			height: 135px;
+			background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
+			position: absolute;
+		}
+
+		.one {
+			animation: downRain 1.5s infinite;
+		}
+
+		.two {
+			animation: downRain 1.3s infinite;
+		}
+
+		.three {
+			animation: downRain 1.8s infinite;
+		}
+
+		.four {
+			animation: downRain 1.9s infinite;
+		}
+
+		.five {
+			animation: downRain 2.2s infinite;
+		}
+
+		@keyframes downRain {
+			0% {
+				top: -10px;
+			}
+
+			100% {
+				top: 100%;
 			}
 		}
 
@@ -208,7 +254,8 @@
 				background-image: url("http://cdn.hwzhj.top/60保密filter.png");
 				background-repeat: no-repeat;
 				background-size: cover;
-				user-select:none;
+				user-select: none;
+
 				.secret-text {
 					position: absolute;
 					width: 90%;
@@ -217,7 +264,7 @@
 					font-size: 18px;
 					font-weight: 200;
 					color: #2b5259;
-					user-select:none;
+					user-select: none;
 
 					ol {
 						position: absolute;
@@ -226,11 +273,11 @@
 						top: 30px;
 						left: 20px;
 						list-style: decimal;
-						user-select:none;
+						user-select: none;
 
 						li {
 							line-height: 26px;
-							user-select:none;
+							user-select: none;
 						}
 					}
 				}
@@ -256,7 +303,8 @@
 			.zero {
 				background-image: url("http://cdn.hwzhj.top/00保密filter.png");
 			}
-			.bottom-share{
+
+			.bottom-share {
 				width: 100%;
 				position: absolute;
 				height: 30px;
@@ -265,6 +313,7 @@
 				// bottom: 55px;
 				top: 485px;
 			}
+
 			.downApp {
 				width: 120px;
 				background-image: url("http://cdn.hwzhj.top/下载app.png");
@@ -272,6 +321,7 @@
 				height: 58px;
 				background-repeat: no-repeat;
 			}
+
 			.share {
 				width: 120px;
 				background-image: url("http://cdn.hwzhj.top/share.png");
@@ -279,29 +329,30 @@
 				height: 58px;
 				background-repeat: no-repeat;
 			}
-			.share-txt{
+
+			.share-txt {
 				position: absolute;
 				font-size: 12px;
 				color: #b45c16;
 				width: 100%;
 				bottom: -43px;
 				text-align: center;
-				user-select:none;
+				user-select: none;
 			}
 
-			.share-txt2{
+			.share-txt2 {
 				position: absolute;
 				font-size: 12px;
 				color: #b45c16;
 				width: 100%;
 				bottom: -23px;
 				text-align: center;
-				user-select:none;
+				user-select: none;
 			}
 
 			.qrCode {
 				position: absolute;
-				width:270px;
+				width: 270px;
 				top: 500px;
 				left: 27px;
 			}
@@ -309,12 +360,13 @@
 
 		.van-popup {
 			background: transparent;
-			.txt{
+
+			.txt {
 				text-align: center;
-				font-size:22px;
+				font-size: 22px;
 				margin: 10px 0px;
-				color:#fff;
-				user-select:none;
+				color: #fff;
+				user-select: none;
 			}
 		}
 	}
