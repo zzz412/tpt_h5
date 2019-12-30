@@ -122,7 +122,7 @@ export default {
       color: #fff;
       font-size: 14px;
       width: 100%;
-      top: 70px;
+      top: 40px;
       position: absolute;
       color: rgba(255, 255, 255, 0.8);
       line-height: 1.8;
@@ -134,7 +134,7 @@ export default {
       height: 160px;
       background: url("http://cdn.hwzhj.top/表盘.png") no-repeat;
       background-size: 100%;
-      top: 400px;
+      top: 350px;
       display: flex;
       align-items: flex-end;
       justify-content: center;

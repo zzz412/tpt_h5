@@ -67,12 +67,12 @@ export default {
     .logo {
       position: absolute;
       width: 90px;
-      top: 65px;
+      top: 40px;
     }
     .txt {
       position: absolute;
       width: 71px;
-      top: 149px;
+      top: 119px;
     }
     .up {
       position: absolute;

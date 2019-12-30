@@ -15,6 +15,7 @@
 				<!-- <div class="share" @click="showWxImage"></div> -->
 				<div class="downApp" @click="goDown"></div>
 				<div class="share" @click="showWxImage"></div>
+				<div class="share-txt2">下载APP 赢新春好礼</div>
 				<div class="share-txt">长按保存图片</div>
 			</div>
 		</div>
@@ -189,29 +190,29 @@
 
 			.logo {
 				position: absolute;
-				width: 90px;
-				top: 40px;
+				width: 80px;
+				top: 15px;
 				left: 0rem;
 			}
 
 			.ten-years {
 				position: absolute;
-				width: 190px;
-				top: 90px;
+				width: 180px;
+				top: 50px;
 			}
 
 			.secret {
 				position: absolute;
-				width: 100%;
-				height: 400px;
-				top: 160px;
+				width: 92%;
+				height: 360px;
+				top: 130px;
 				background-image: url("http://cdn.hwzhj.top/60保密filter.png");
 				background-repeat: no-repeat;
 				background-size: cover;
 				user-select:none;
 				.secret-text {
 					position: absolute;
-					width: 80%;
+					width: 90%;
 					top: 30px;
 					left: 35px;
 					font-size: 18px;
@@ -263,17 +264,17 @@
 				display: flex;
 				justify-content: space-around;
 				// bottom: 55px;
-				top: 580px;
+				top: 510px;
 			}
 			.downApp {
-				width: 131px;
+				width: 120px;
 				background-image: url("http://cdn.hwzhj.top/下载app.png");
 				background-size: contain;
 				height: 58px;
 				background-repeat: no-repeat;
 			}
 			.share {
-				width: 131px;
+				width: 120px;
 				background-image: url("http://cdn.hwzhj.top/share.png");
 				background-size: contain;
 				height: 58px;
@@ -284,7 +285,17 @@
 				font-size: 12px;
 				color: #b45c16;
 				width: 100%;
-				bottom: -35px;
+				bottom: -43px;
+				text-align: center;
+				user-select:none;
+			}
+
+			.share-txt2{
+				position: absolute;
+				font-size: 12px;
+				color: #b45c16;
+				width: 100%;
+				bottom: -23px;
 				text-align: center;
 				user-select:none;
 			}
