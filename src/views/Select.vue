@@ -236,7 +236,7 @@
 				position: absolute;
 				width: 80%;
 				height: 120px;
-				top: 430px;
+				top: 420px;
 				text-align: center;
 				font-size: 14px;
 				color: #dbdbdb;
@@ -248,7 +248,7 @@
 				position: absolute;
 				width: 100%;
 				height: 160px;
-				top: 560px;
+				top: 520px;
 				text-align: center;
 
 				.change {

@@ -15,9 +15,14 @@ export default {
             this.endX = e.changedTouches[0].screenY;
             if (this.startX - this.endX > 0) {
                 this.goPage()
+            }else{
+                this.goPage2()
             }
         },
         goPage() {
+
+        },
+        goPage2() {
 
         }
     }

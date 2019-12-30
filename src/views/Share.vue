@@ -12,7 +12,6 @@
 				</p>
 			</div>
 			<div class="bottom-share">
-				<!-- <div class="share" @click="showWxImage"></div> -->
 				<div class="downApp" @click="goDown"></div>
 				<div class="share" @click="showWxImage"></div>
 				<div class="share-txt2">下载APP 赢新春好礼</div>
@@ -191,21 +190,21 @@
 			.logo {
 				position: absolute;
 				width: 80px;
-				top: 15px;
+				top: 10px;
 				left: 0rem;
 			}
 
 			.ten-years {
 				position: absolute;
 				width: 180px;
-				top: 50px;
+				top: 40px;
 			}
 
 			.secret {
 				position: absolute;
 				width: 92%;
-				height: 360px;
-				top: 130px;
+				height: 370px;
+				top: 110px;
 				background-image: url("http://cdn.hwzhj.top/60保密filter.png");
 				background-repeat: no-repeat;
 				background-size: cover;
@@ -264,7 +263,7 @@
 				display: flex;
 				justify-content: space-around;
 				// bottom: 55px;
-				top: 510px;
+				top: 485px;
 			}
 			.downApp {
 				width: 120px;
@@ -302,9 +301,9 @@
 
 			.qrCode {
 				position: absolute;
-				width: 7rem;
-				top: 15.46667rem;
-				left: 7px;
+				width:270px;
+				top: 500px;
+				left: 27px;
 			}
 		}
 

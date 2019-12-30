@@ -14,7 +14,9 @@
         <div class="bottom">
           <div class="text">拨动数字 选择你的年代</div>
           <!-- <div class="year_bg" @click="show=true"> -->
-          <div class="year_bg" v-touch:swipe.top="yearTop" v-touch:swipe.bottom="yearBottom">
+          <!-- v-touch:swipe.top="yearTop" v-touch:swipe.bottom="yearBottom" -->
+          <!-- <div class="year_bg" v-touch:start="start" v-touch:end="swipeHandler"> -->
+          <div class="year_bg" v-touch:start="start" v-touch:end="swipeHandler">
             <span>{{yearCopy[2]}}</span>
             <span>{{yearCopy[3]}}</span>
           </div>
@@ -33,10 +35,10 @@
 <script>
 import { Picker, Popup, Toast, Field, Swipe, SwipeItem } from "vant";
 //导入vuex state mutations辅助方法
-import mixins from "@/mixins/touchu";
+// import mixins from "@/mixins/touchu";
 import { mapMutations, mapState } from "vuex";
 export default {
-  mixins: [mixins],
+  // mixins: [mixins],
   components: {
     Picker,
     Popup,
@@ -58,7 +60,10 @@ export default {
       columns: ["1960", "1970", "1980", "1990", "2000"],
       year: "1990",
       yearCopy: "1990",
-      userName: ""
+      userName: "",
+      startX: 0,
+      endX: 0,
+      flag: false
     };
   },
   methods: {
@@ -82,10 +87,27 @@ export default {
       this.year = value;
       this.show = false;
     },
+    start(e) {
+      this.startX = e.changedTouches[0].screenY;
+      // console.log('开始', e)
+    },
+    swipeHandler(e) {
+      // console.log(e)
+      this.endX = e.changedTouches[0].screenY;
+      if (this.startX - this.endX > 0) {
+        // this.goPage();
+        this.yearTop();
+      } else {
+        // this.goPage2();
+        this.yearBottom();
+      }
+    },
     // 数字牌上滑
-    yearTop(a, e) {
-      e.stopPropagation();
+    yearTop() {
+      // e.stopPropagation();
       // [].
+      if (this.flag) return;
+      this.flag = true;
       let index = this.columns.findIndex(item => item === this.year);
       if (index == this.columns.length - 1) {
         index = 0;
@@ -96,9 +118,11 @@ export default {
       this.numRunFun(this.year - 0, this.columns[index] - 0);
     },
     // 数字牌下滑
-    yearBottom(a, e) {
-      e.stopPropagation();
+    yearBottom() {
+      // e.stopPropagation();
       // [].
+      if (this.flag) return;
+      this.flag = true;
       let index = this.columns.findIndex(item => item === this.year);
       if (index == 0) {
         index = this.columns.length - 1;
@@ -106,8 +130,8 @@ export default {
         index--;
       }
       // this.year = this.columns[index];
-      console.log(this.year - 0);
-      console.log(this.columns[index] - 0);
+      // console.log(this.year - 0);
+      // console.log(this.columns[index] - 0);
       this.numRunFun(this.year - 0, this.columns[index] - 0);
     },
     /**
@@ -126,7 +150,10 @@ export default {
             cancelAnimationFrame(golb);
           } else {
             golb = requestAnimationFrame(numSlideFun);
-            this.year = ~~numText + 1 + "";
+            if (maxNum == numText + 1) {
+              this.year = ~~numText + 1 + "";
+              this.flag = false;
+            }
           }
           this.yearCopy = ~~numText + "";
         };
@@ -138,7 +165,10 @@ export default {
             cancelAnimationFrame(golb);
           } else {
             golb = requestAnimationFrame(numSlideFun);
-            this.year = ~~numText - 1 + "";
+            if (maxNum == numText - 1) {
+              this.year = ~~numText - 1 + "";
+              this.flag = false;
+            }
           }
           this.yearCopy = ~~numText + "";
         };
@@ -178,7 +208,7 @@ export default {
 
     .top {
       position: absolute;
-      top: 100px;
+      top: 110px;
       .input_bg {
         width: 200px;
         height: 47px;
@@ -252,6 +282,8 @@ export default {
     margin-top: 6px;
     &::placeholder {
       color: #c06c2c;
+      padding-top: 2px;
+      line-height: normal;
     }
   }
 }
