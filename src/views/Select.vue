@@ -1,6 +1,12 @@
 <template>
 	<div class="bg" v-touch:swipe.bottom="swipeHandler">
 		<div class="loading">
+		<div class="rain" style="left: 2%;"></div>
+		<div class="rain" style="left: 10%;"></div>
+		<div class="rain" style="left: 25%;"></div>
+		<div class="rain" style="left: 58%;"></div>
+		<div class="rain" style="left: 72%;"></div>
+		<div class="rain" style="left: 88%;"></div>
 			<div class="tab">
 				<div class="tag tag-default" :class="[
 				isFx(index)?'tag-fx2':'tag-fx1',
@@ -146,6 +152,23 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
+		
+		.rain{
+			width: 2px;
+			height: 60px;
+			background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
+			position: absolute;
+			animation: downRain 2s infinite;
+			@keyframes downRain {
+				0% {
+					top: -10px;
+				}
+			
+				100% {
+					top: 100%;
+				}
+			}
+		}
 
 		.loading {
 			position: relative;
