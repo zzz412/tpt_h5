@@ -1,12 +1,14 @@
 <template>
 	<div class="bg" v-touch:swipe.bottom="swipeHandler">
 		<div class="loading">
-		<!-- <div class="rain" style="left: 2%;"></div>
-		<div class="rain" style="left: 10%;"></div>
-		<div class="rain" style="left: 25%;"></div>
-		<div class="rain" style="left: 58%;"></div>
-		<div class="rain" style="left: 72%;"></div>
-		<div class="rain" style="left: 88%;"></div> -->
+			<div class="rain one" style="left: 2%;"></div>
+			<div class="rain three" style="left: 10%;"></div>
+			<div class="rain two" style="left: 25%;"></div>
+			<div class="rain five" style="left: 45%;"></div>
+			<div class="rain three" style="left: 58%;"></div>
+			<div class="rain four" style="left: 72%;"></div>
+			<div class="rain two" style="left: 88%;"></div>
+			<div class="rain five" style="left: 96%;"></div>
 			<div class="tab">
 				<div class="tag tag-default" :class="[
 				isFx(index)?'tag-fx2':'tag-fx1',
@@ -25,7 +27,7 @@
 				<img class="toast-bg" src="http://cdn.hwzhj.top/_编组_.png" alt />
 
 			</div>
-			
+
 			<div class="statistics">
 				已选择 {{selectedData.length}} / 5
 			</div>
@@ -154,21 +156,41 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
-		
-		.rain{
+
+		.rain {
 			width: 2px;
-			height: 60px;
+			height: 135px;
 			background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
 			position: absolute;
-			animation: downRain 2s infinite;
-			@keyframes downRain {
-				0% {
-					top: -10px;
-				}
-			
-				100% {
-					top: 100%;
-				}
+		}
+
+		.one {
+			animation: downRain 1.5s infinite;
+		}
+
+		.two {
+			animation: downRain 1.3s infinite;
+		}
+
+		.three {
+			animation: downRain 1.8s infinite;
+		}
+
+		.four {
+			animation: downRain 1.9s infinite;
+		}
+
+		.five {
+			animation: downRain 2.2s infinite;
+		}
+
+		@keyframes downRain {
+			0% {
+				top: -10px;
+			}
+
+			100% {
+				top: 100%;
 			}
 		}
 
@@ -256,8 +278,8 @@
 					background: #fff;
 				}
 			}
-			
-			.statistics{
+
+			.statistics {
 				position: absolute;
 				width: 80%;
 				height: 120px;
@@ -268,7 +290,7 @@
 				line-height: 120px;
 				// background: #FFFFFF;
 			}
-			
+
 			.button {
 				position: absolute;
 				width: 100%;

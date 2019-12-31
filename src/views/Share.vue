@@ -1,6 +1,14 @@
 <template>
   <div class="bg" id="bg" v-touch:swipe.bottom="swipeHandler" v-touch:longtap="longtapHandler">
     <div class="loading">
+      <div class="rain one" style="left: 2%;"></div>
+      <div class="rain three" style="left: 10%;"></div>
+      <div class="rain two" style="left: 25%;"></div>
+      <div class="rain five" style="left: 45%;"></div>
+      <div class="rain three" style="left: 58%;"></div>
+      <div class="rain four" style="left: 72%;"></div>
+      <div class="rain two" style="left: 88%;"></div>
+      <div class="rain five" style="left: 96%;"></div>
       <img src="http://cdn.hwzhj.top/Logo.png" class="logo" alt />
       <img src="http://cdn.hwzhj.top/主标题.png" class="ten-years" alt />
       <div :class="showBg">
@@ -18,7 +26,6 @@
         <div class="share-txt">长按保存图片</div>
       </div>
     </div>
-
     <div class="shareWx" @click="hiddenImage" v-show="wxImageShow">
       <img class="wxImage" src="http://cdn.hwzhj.top/微信内-分享提示.png" />
     </div>
@@ -186,6 +193,46 @@ export default {
 
   .eight {
     background-image: url("http://cdn.hwzhj.top/80保密filter.png");
+  }
+  .rain {
+    width: 2px;
+    height: 135px;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.25)
+    );
+    position: absolute;
+  }
+
+  .one {
+    animation: downRain 1.5s infinite;
+  }
+
+  .two {
+    animation: downRain 1.3s infinite;
+  }
+
+  .three {
+    animation: downRain 1.8s infinite;
+  }
+
+  .four {
+    animation: downRain 1.9s infinite;
+  }
+
+  .five {
+    animation: downRain 2.2s infinite;
+  }
+
+  @keyframes downRain {
+    0% {
+      top: -10px;
+    }
+
+    100% {
+      top: 100%;
+    }
   }
 
   .nine {

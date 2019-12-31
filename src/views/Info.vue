@@ -2,6 +2,14 @@
   <!-- <div class="bg" v-touch:swipe.top="swipeTopHandler"> -->
   <div class="bg">
     <div class="loading">
+      <div class="rain one" style="left: 2%;"></div>
+      <div class="rain three" style="left: 10%;"></div>
+      <div class="rain two" style="left: 25%;"></div>
+      <div class="rain five" style="left: 45%;"></div>
+      <div class="rain three" style="left: 58%;"></div>
+      <div class="rain four" style="left: 72%;"></div>
+      <div class="rain two" style="left: 88%;"></div>
+      <div class="rain five" style="left: 96%;"></div>
       <transition name="txt" appear>
         <div class="top">
           <div class="text">你的信件署名</div>
@@ -30,6 +38,7 @@
       <Picker :columns="columns" show-toolbar @cancel="show = false" @confirm="onConfirm" />
     </Popup>
   </div>
+  <!-- <div class="bg" v-touch:swipe.top="swipeTopHandler"> -->
 </template>
 
 <script>
@@ -190,6 +199,48 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
+
+  .rain {
+    width: 2px;
+    height: 135px;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.25)
+    );
+    position: absolute;
+  }
+
+  .one {
+    animation: downRain 1.5s infinite;
+  }
+
+  .two {
+    animation: downRain 1.3s infinite;
+  }
+
+  .three {
+    animation: downRain 1.8s infinite;
+  }
+
+  .four {
+    animation: downRain 1.9s infinite;
+  }
+
+  .five {
+    animation: downRain 2.2s infinite;
+  }
+
+  @keyframes downRain {
+    0% {
+      top: -10px;
+    }
+
+    100% {
+      top: 100%;
+    }
+  }
+
   .loading {
     position: relative;
     margin: 0 auto;
@@ -197,6 +248,7 @@ export default {
     width: 90%;
     display: flex;
     justify-content: center;
+
     .text {
       color: #fff;
       font-size: 15px;
@@ -209,6 +261,7 @@ export default {
     .top {
       position: absolute;
       top: 110px;
+
       .input_bg {
         width: 200px;
         height: 47px;
@@ -217,9 +270,11 @@ export default {
         margin-top: 20px;
       }
     }
+
     .bottom {
       position: absolute;
       top: 245px;
+
       .year_bg {
         width: 200px;
         height: 156px;
@@ -231,12 +286,14 @@ export default {
         align-items: center;
         box-sizing: border-box;
         justify-content: space-around;
+
         span {
           display: block;
           font-size: 110px;
           color: #c16929;
         }
       }
+
       .text2 {
         color: #a24b0b;
         font-size: 15px;
@@ -248,8 +305,8 @@ export default {
 
     .up {
       position: absolute;
-      width: 132.5px;
-      top: 530px;
+      width: 112.5px;
+      top: 540px;
       // animation: mymove 1.3s ease-in-out infinite alternate;
       // @keyframes mymove {
       //   from {
@@ -263,12 +320,13 @@ export default {
   }
 }
 </style>
-<style lang="scss" >
+<style lang="scss">
 .input_bg {
   .van-cell {
     padding: 0;
     background: transparent;
   }
+
   .van-field__control {
     width: 100%;
     background-color: transparent;
@@ -280,6 +338,7 @@ export default {
     // color: #c06c2c;
     text-align: center;
     margin-top: 6px;
+
     &::placeholder {
       color: #c06c2c;
       padding-top: 2px;
