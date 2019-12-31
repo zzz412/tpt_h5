@@ -1,12 +1,12 @@
 <template>
 	<div class="bg" v-touch:swipe.bottom="swipeHandler">
 		<div class="loading">
-		<div class="rain" style="left: 2%;"></div>
+		<!-- <div class="rain" style="left: 2%;"></div>
 		<div class="rain" style="left: 10%;"></div>
 		<div class="rain" style="left: 25%;"></div>
 		<div class="rain" style="left: 58%;"></div>
 		<div class="rain" style="left: 72%;"></div>
-		<div class="rain" style="left: 88%;"></div>
+		<div class="rain" style="left: 88%;"></div> -->
 			<div class="tab">
 				<div class="tag tag-default" :class="[
 				isFx(index)?'tag-fx2':'tag-fx1',
@@ -21,7 +21,9 @@
 				<!-- <div v-for="da in showData">
 					<div>{{da}}</div>
         </div>-->
-				<img class="toast-bg" src="http://cdn.hwzhj.top/选择提示.png" alt />
+				<!-- <img class="toast-bg" src="http://cdn.hwzhj.top/选择提示.png" alt /> -->
+				<img class="toast-bg" src="http://cdn.hwzhj.top/_编组_.png" alt />
+
 			</div>
 			
 			<div class="statistics">
@@ -190,7 +192,7 @@
 
 				.toast-bg {
 					position: absolute;
-					width: 38px;
+					width: 45px;
 					right: 40px;
 					bottom: -40px;
 					animation: mymove 1.3s ease-in-out infinite alternate;

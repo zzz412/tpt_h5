@@ -23,7 +23,7 @@
           <div class="text2">滑动选择</div>
         </div>
       </transition>
-      <img src="http://cdn.hwzhj.top/开始写信.png" class="up" alt @click="goPage" />
+      <img src="http://cdn.hwzhj.top/开始.png" class="up" alt @click="goPage" />
     </div>
     <Popup v-model="show" position="bottom">
       <!-- <div></div> -->
@@ -248,8 +248,8 @@ export default {
 
     .up {
       position: absolute;
-      width: 112.5px;
-      top: 540px;
+      width: 132.5px;
+      top: 530px;
       // animation: mymove 1.3s ease-in-out infinite alternate;
       // @keyframes mymove {
       //   from {
