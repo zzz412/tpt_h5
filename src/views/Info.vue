@@ -88,6 +88,7 @@ export default {
         userName: this.userName,
         userYear: this.year.slice(2)
       });
+
       // this.$router.push("/select");
       this.$store.commit("CHANGE_ROUTER", "Select");
     },
