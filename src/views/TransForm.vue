@@ -14,7 +14,7 @@
           <p v-for="(item ,index) in data" :key="index">{{item}}</p>
         </transition-group>
       </div>
-      <transition name="list" appear>
+      <transition name="clock" appear>
         <div class="clock">
           <p>{{num}}</p>
           <span class="raduis"></span>
@@ -107,11 +107,22 @@ export default {
 
 .list-enter-active,
 .list-leave-active {
-  transition: all 1s;
+  transition: all 3s;
 }
 
 .list-enter,
 .list-leave-to {
+  opacity: 0;
+  // transform: translateY(30px);
+}
+
+.clock-enter-active,
+.clock-leave-active {
+  transition: all 2s;
+}
+
+.clock-enter,
+.clock-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }

@@ -20,10 +20,10 @@
         </div>
       </div>
       <div class="bottom-share">
-        <div class="downApp" @click="goDown"></div>
+        <div v-if="isWX" class="downApp" @click="goDown"></div>
         <div class="share" @click="showWxImage"></div>
-        <div class="share-txt2">下载APP 赢新春好礼</div>
-        <div class="share-txt">长按保存图片</div>
+        <div v-if="isWX" class="share-txt2">下载APP 赢新春好礼</div>
+        <div v-if="isWX" class="share-txt">长按保存图片</div>
       </div>
     </div>
     <div class="shareWx" @click="hiddenImage" v-show="wxImageShow">
@@ -33,7 +33,7 @@
     <div class="bg-img" ref="imageWrapper" style>
       <div class="loading">
         <img src="http://cdn.hwzhj.top/Logo.png" class="logo" alt />
-        <img src="http://cdn.hwzhj.top/文案.png" class="ten-years" alt />
+        <img src="http://cdn.hwzhj.top/主标题.png" class="ten-years" alt />
         <div :class="showBg">
           <div class="secret-text">
             <span>{{userInfo.userName}}：</span>
@@ -42,7 +42,7 @@
             </ol>
           </div>
         </div>
-        <img src="http://cdn.hwzhj.top/qr.png" class="qrCode" alt />
+        <img src="http://cdn.hwzhj.top/二维码区域.png" class="qrCode" alt />
       </div>
     </div>
     <Popup v-model="show" style="width: 80%;">
@@ -101,7 +101,11 @@ export default {
     };
   },
   computed: {
-    ...mapState(["userInfo", "selectedData"])
+    ...mapState(["userInfo", "selectedData"]),
+    isWX() {
+      var ua = window.navigator.userAgent.toLowerCase();
+      return ua.match(/MicroMessenger/i) == "micromessenger";
+    }
   },
   mounted() {
     const bg = this.bg.find(item => {
@@ -118,7 +122,7 @@ export default {
       const shareInfo = {
         title: "给未来十年的自己|我想对你说…",
         imgUrl: "http://cdn.hwzhj.top/分享页面.jpg",
-        url: "http://zeng.pub/tpth5",
+        url: "http://zeng.pub/static/tpth5",
         content: "在吗？我是十年后的你，你有什么想对我说？"
       };
       TPTJS.tpH5Share(shareInfo);
@@ -137,9 +141,8 @@ export default {
         let dataURL = canvas.toDataURL("image/png");
         this.imgUrl = dataURL;
         if (this.imgUrl !== "") {
-          var ua = window.navigator.userAgent.toLowerCase();
           //通过正则表达式匹配ua中是否含有MicroMessenger字符串
-          if (ua.match(/MicroMessenger/i) == "micromessenger") {
+          if (this.isWX) {
             this.show = true;
           } else {
             this.saveFile(this.imgUrl, "share.jpg");

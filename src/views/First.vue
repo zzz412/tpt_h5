@@ -51,12 +51,12 @@
 <style lang="scss" scoped>
 	.txt-enter {
 		opacity: 0;
-		// transform: translateX(50px);
-		transform: scale(0.3);
+		transform: translateX(0);
+		// transform: scale(0.3);
 	}
 
 	.txt-enter-active {
-		transition: all 1.2s;
+		transition: all 2s;
 	}
 
 	.bg {
