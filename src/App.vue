@@ -40,7 +40,6 @@ export default {
     audioAutoPlay(id) {
       var audio = (this.bgMusic = document.getElementById(id)),
         play = () => {
-          console.log(333);
           audio.play();
           this.bgState = false;
           document.removeEventListener("touchstart", play, false);
@@ -49,7 +48,6 @@ export default {
       document.addEventListener(
         "WeixinJSBridgeReady",
         () => {
-          console.log(222);
           play();
           this.bgState = false;
         },
@@ -58,7 +56,6 @@ export default {
       document.addEventListener(
         "YixinJSBridgeReady",
         () => {
-          console.log(111);
           play();
           this.bgState = false;
         },
@@ -68,11 +65,11 @@ export default {
     },
     musicContrl() {
       if (this.bgState) {
-        console.log("开始", this.bgState);
+        // console.log("开始", this.bgState);
         this.bgMusic.play();
         this.bgState = false;
       } else {
-        console.log("暂停", this.bgState);
+        // console.log("暂停", this.bgState);
         this.bgMusic.pause();
         this.bgState = true;
       }

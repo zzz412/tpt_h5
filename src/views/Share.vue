@@ -1,5 +1,6 @@
 <template>
-  <div class="bg" id="bg" v-touch:swipe.bottom="swipeHandler" v-touch:longtap="longtapHandler">
+  <!-- <div class="bg" id="bg" v-touch:swipe.bottom="swipeHandler" v-touch:longtap="longtapHandler"> -->
+  <div class="bg" id="bg" v-touch:swipe.bottom="swipeHandler">
     <div class="loading">
       <div class="rain one" style="left: 2%;"></div>
       <div class="rain three" style="left: 10%;"></div>
@@ -20,10 +21,21 @@
         </div>
       </div>
       <div class="bottom-share">
-        <div v-if="isWX" class="downApp" @click="goDown"></div>
-        <div class="share" @click="showWxImage"></div>
-        <div v-if="isWX" class="share-txt2">下载APP 赢新春好礼</div>
-        <div v-if="isWX" class="share-txt">长按保存图片</div>
+        <template v-if="isWX">
+          <div class="downApp" @click="goDown">
+            <div class="share-txt2">赢新春好礼</div>
+          </div>
+          <div class="share" @click="longtapHandler">
+            <div class="share-txt">分享十年目标</div>
+          </div>
+        </template>
+        <template v-else>
+          <div class="inviteBtn" @click="showWxImage"></div>
+          <div class="qrBtn">
+            <div class="qr-txt1">截图分享</div>
+            <div class="qr-txt2">未来十年的目标</div>
+          </div>
+        </template>
       </div>
     </div>
     <div class="shareWx" @click="hiddenImage" v-show="wxImageShow">
@@ -42,7 +54,7 @@
             </ol>
           </div>
         </div>
-        <img src="http://cdn.hwzhj.top/二维码区域.png" class="qrCode" alt />
+        <img src="http://cdn.hwzhj.top/qr2.png" class="qrCode" alt />
       </div>
     </div>
     <Popup v-model="show" style="width: 80%;">
@@ -118,14 +130,23 @@ export default {
   methods: {
     // 显示分享
     showWxImage() {
-      this.wxImageShow = true;
-      const shareInfo = {
-        title: "给未来十年的自己|我想对你说…",
-        imgUrl: "http://cdn.hwzhj.top/分享页面.jpg",
-        url: "http://zeng.pub/static/tpth5",
-        content: "在吗？我是十年后的你，你有什么想对我说？"
-      };
-      TPTJS.tpH5Share(shareInfo);
+      if (this.isWX) {
+        // this.wxImageShow = true;
+      } else {
+        let title = [
+          "给未来十年的自己|我想对你说…",
+          "十年一刻，你想对自己说点什么？",
+          "再见旧时光，你好新十年！"
+        ];
+        const shareInfo = {
+          title: title[Math.floor(Math.random() * 3)],
+          imgUrl: "https://www.hwzhj.top/static/shareLogo.jpg",
+          url: "https://ecustomer.cntaiping.com/static/tpth5/",
+          content: "在吗？我是十年后的你，你有什么想对我说？"
+        };
+        TPTJS.tpAppShare(shareInfo);
+        TPTJS.tpH5Share(shareInfo);
+      }
     },
     // 隐藏分享图标
     hiddenImage() {
@@ -335,26 +356,66 @@ export default {
       top: 485px;
     }
     .downApp {
-      width: 120px;
-      background-image: url("http://cdn.hwzhj.top/下载app.png");
+      width: 128px;
+      background-image: url("http://cdn.hwzhj.top/tptBtn.png");
       background-size: contain;
       height: 58px;
       background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
     }
     .share {
-      width: 120px;
-      background-image: url("http://cdn.hwzhj.top/share.png");
+      width: 128px;
+      // background-image: url("http://cdn.hwzhj.top/share.png");
+      background-image: url("http://cdn.hwzhj.top/saveImg.png");
       background-size: contain;
       height: 58px;
       background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+    }
+    .inviteBtn {
+      width: 150px;
+      background-image: url("http://cdn.hwzhj.top/sharebtn.png");
+      background-size: contain;
+      height: 58px;
+      background-repeat: no-repeat;
+      position: absolute;
+      left: 65px;
+      top: 10px;
+    }
+    .qrBtn {
+      width: 70px;
+      background-image: url("http://cdn.hwzhj.top/qr3.png");
+      background-size: contain;
+      height: 70px;
+      background-repeat: no-repeat;
+      position: absolute;
+      right: 30px;
+      top: 5px;
+    }
+    .qr-txt1 {
+      font-size: 14px;
+      width: 20px;
+      position: absolute;
+      right: -25px;
+      color: #b45c16;
+    }
+    .qr-txt2 {
+      font-size: 14px;
+      width: 20px;
+      position: absolute;
+      right: -45px;
+      top: -20px;
+      color: #b45c16;
     }
     .share-txt {
       position: absolute;
       font-size: 12px;
       color: #b45c16;
-      width: 100%;
-      bottom: -43px;
-      text-align: center;
+      // width: 100%;
+      bottom: -20px;
+      // text-align: center;
       user-select: none;
     }
 
@@ -362,9 +423,9 @@ export default {
       position: absolute;
       font-size: 12px;
       color: #b45c16;
-      width: 100%;
-      bottom: -23px;
-      text-align: center;
+      // width: 100%;
+      bottom: -20px;
+      // text-align: center;
       user-select: none;
     }
   }
